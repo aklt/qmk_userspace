@@ -12,5 +12,11 @@ ifeq ($(QMK_FIRMWARE_ROOT),)
     $(error Cannot determine qmk_firmware location. `qmk config -ro user.qmk_home` is not set)
 endif
 
+build:
+	qmk compile -e CONVERT_TO=liatris -kb splitkb/aurora/sofle_v2 -km vial
+
+hfile:
+	qmk json2c sofle-layout.json -o keyboards/splitkb/aurora/sofle_v2/keymaps/vial/sofle-layout.h
+
 %:
 	+$(MAKE) -C $(QMK_FIRMWARE_ROOT) $(MAKECMDGOALS) QMK_USERSPACE=$(QMK_USERSPACE)
