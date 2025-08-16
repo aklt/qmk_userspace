@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo -n "\n  https://config.qmk.fm/
+         see keyboards/splitkb/aurora/sofle_v2/keymaps/vial/keymap.c
+        "
+
 # Use entr to watch the Downloads directory and when a file named "test.txt" is created, run the command "echo 'test.txt created'"
 while true; do
     echo "$HOME/Downloads" | entr -d 'echo'

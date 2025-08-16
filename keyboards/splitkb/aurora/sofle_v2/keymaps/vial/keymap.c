@@ -3,8 +3,6 @@
 #    include "keymap.h"
 #endif
 
-#include "sofle-layout.h"
-
 enum unicode_names {
     BANG,
     IRONY,
@@ -13,7 +11,13 @@ enum unicode_names {
     SMILE,
     UPSIDE,
     WINK,
-    LOVE
+    LOVE,
+    DK_AE,
+    DK_OE,
+    DK_AA,
+    DK_AE_UPPER,
+    DK_OE_UPPER,
+    DK_AA_UPPER
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -25,7 +29,15 @@ const uint32_t PROGMEM unicode_map[] = {
     [UPSIDE]  = 0x1F643,  // 🙃
     [WINK]    = 0x1F643,    // 😉
     [LOVE]    = 0x1F60D,    // 😍
+    [DK_AE]   = 0x00E6,  // æ
+    [DK_OE]   = 0x00F8,  // ø
+    [DK_AA]   = 0x00E5,  // å
+    [DK_AE_UPPER]   = 0x00C6,  // Æ
+    [DK_OE_UPPER]   = 0x00D8,  // Ø
+    [DK_AA_UPPER]   = 0x00C5,  // Å
 };
+
+#include "sofle-layout.h"
 
 /*
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
