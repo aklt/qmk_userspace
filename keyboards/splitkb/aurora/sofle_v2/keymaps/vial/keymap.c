@@ -8,6 +8,7 @@ enum unicode_names {
     IRONY,
     SNEK,
     ROLL,
+    CAT,
     SMILE,
     UPSIDE,
     WINK,
@@ -24,11 +25,12 @@ const uint32_t PROGMEM unicode_map[] = {
     [BANG]    = 0x203D,  // ‽
     [IRONY]   = 0x2E2E,  // ⸮
     [SNEK]    = 0x1F40D, // 🐍
-    [ROLL]    = 0x1F923,  // 🤣
-    [SMILE]   = 0x1F642,   // 🙂
-    [UPSIDE]  = 0x1F643,  // 🙃
-    [WINK]    = 0x1F643,    // 😉
-    [LOVE]    = 0x1F60D,    // 😍
+    [ROLL]    = 0x1F923, // 🤣
+    [CAT]     = 0x1F639, // 😹
+    [SMILE]   = 0x1F60A, // 😊
+    [UPSIDE]  = 0x1F643, // 🙃
+    [WINK]    = 0x1F602, // 😂
+    [LOVE]    = 0x1F60D, // 😍
     [DK_AE]   = 0x00E6,  // æ
     [DK_OE]   = 0x00F8,  // ø
     [DK_AA]   = 0x00E5,  // å
