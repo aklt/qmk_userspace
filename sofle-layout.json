@@ -63,9 +63,9 @@
       "LT(2,KC_INS)",
       "LT(1,KC_SPC)",
       "KC_SPC",
-      "KC_APP",
+      "RALT_T(KC_ENT)",
       "KC_RGUI",
-      "RALT_T(KC_LBRC)",
+      "KC_APP",
       "RGUI_T(KC_RBRC)"
     ],
     [
