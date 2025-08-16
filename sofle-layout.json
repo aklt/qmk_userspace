@@ -64,8 +64,8 @@
       "LT(1,KC_SPC)",
       "KC_SPC",
       "RALT_T(KC_ENT)",
-      "KC_RGUI",
       "KC_APP",
+      "LT(4,KC_LBRC)",
       "RGUI_T(KC_RBRC)"
     ],
     [
@@ -127,8 +127,8 @@
       "TG(2)",
       "KC_NO",
       "KC_TRNS",
-      "KC_TRNS",
-      "KC_F24"
+      "KC_LCBR",
+      "KC_RCBR"
     ],
     [
       "KC_F1",
