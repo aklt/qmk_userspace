@@ -63,10 +63,10 @@
       "LT(2,KC_INS)",
       "LT(1,KC_SPC)",
       "KC_SPC",
-      "RALT_T(KC_ENT)",
+      "KC_RGUI",
       "KC_APP",
       "LT(4,KC_LBRC)",
-      "RGUI_T(KC_RBRC)"
+      "RGUI_T(KC_QUES)"
     ],
     [
       "KC_ESC",
@@ -137,7 +137,7 @@
       "KC_F4",
       "KC_F5",
       "KC_F6",
-      "KC_DEL",
+      "KC_TRNS",
       "KC_NUM",
       "KC_PAST",
       "KC_LGUI",
@@ -158,7 +158,7 @@
       "KC_INS",
       "KC_PSCR",
       "KC_TRNS",
-      "KC_TRNS",
+      "KC_DEL",
       "KC_TRNS",
       "KC_TRNS",
       "KC_B",
