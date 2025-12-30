@@ -1,6 +1,18 @@
-# QMK Userspace
+# My Keymap
 
-This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the main QMK repository.
+This is a keymap that I made for use on Linux and Mac for the Sofle keyboard
+and hopefully also for the Ferris Sweep.
+
+Features:
+
+- 2 ways to handle layers: hold for temporary, tap to cycle overlays
+- Orbital mouse
+- SM_TD Homerow mods
+- Qwerty and Colemak-dh
+- Case-Word
+
+
+## Layers
 
 ## Howto configure your build targets
 

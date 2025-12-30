@@ -13,10 +13,13 @@ ifeq ($(QMK_FIRMWARE_ROOT),)
 endif
 
 build:
-	qmk compile -e CONVERT_TO=liatris -kb splitkb/aurora/sofle_v2 -km aklt_keymap
+	qmk compile -kb splitkb/aurora/sofle_v2 -km aklt
 
-hfile: sofle-layout.json
-	+$(MAKE) -C $(QMK_FIRMWARE_ROOT) $(MAKECMDGOALS) QMK_USERSPACE=$(QMK_USERSPACE)
+bear: clean
+	bear -- $(MAKE) build
 
-flash:
-	qmk flash -e CONVERT_TO=liatris --keyboard splitkb/aurora/sofle_v2 --keymap aklt_keymap
+install:
+	mkdir -p modules
+	git submodule add https://github.com/getreuer/qmk-modules.git modules/getreuer
+	# git submodule add https://github.com/stasmarkin/sm_td.git modules/stasmarkin
+	git submodule update --init --recursive
