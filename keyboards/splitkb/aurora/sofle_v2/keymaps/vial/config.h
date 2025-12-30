@@ -3,13 +3,17 @@
 
 #pragma once
 
-#define VIAL_KEYBOARD_UID {0x7C, 0x39, 0x7C, 0x45, 0x65, 0xB7, 0x48, 0x82}
-
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 5 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
-
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+#define ENABLE_RGB_MATRIX_SOLID_SPLASH
+#define ENABLE_RGB_MATRIX_RAINBOW_BEACON
+#define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 12
 #define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX, UNICODE_MODE_MACOS, UNICODE_MODE_WINCOMPOSE
+
+// ms within which to trigger the combo
+#define COMBO_TERM 60
+// Combos keys are always checked from layer 0, even if other layers are active.
+#define COMBO_ONLY_FROM_LAYER 0

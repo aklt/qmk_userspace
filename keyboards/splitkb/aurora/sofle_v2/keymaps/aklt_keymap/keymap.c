@@ -3,6 +3,12 @@
 #    include "keymap.h"
 #endif
 
+// {{{1 LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
+void keyboard_pre_init_user(void) {
+    gpio_set_pin_output(24);
+    gpio_write_pin_high(24);
+}
+
 // {{{1 Unicode Characters
 
 enum unicode_names {
@@ -57,7 +63,38 @@ combo_t key_combos[] = {
 };
 
 
-// {{{1 Other
+// {{{1 Debug
+void keyboard_post_init_user() {
+  // Debug
+  // debug_enable=true;
+  // debug_matrix=true;
+  // debug_keyboard=true;
+  // debug_mouse=true;
+
+  // Initialize RGB to static black
+  // rgblight_enable_noeeprom();
+  // rgblight_sethsv_noeeprom(HSV_BLACK);
+  // rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+}
+
+// void housekeeping_task_user(void) {
+//     switch (get_highest_layer(layer_state | default_layer_state)) {
+//         case 0:
+//             // Default layer
+//             rgblight_setrgb_at(RGB_BLACK, 0);
+//             break;
+//         case 1:
+//             rgblight_setrgb_at(RGB_RED, 0);
+//             break;
+//         case 2:
+//             rgblight_setrgb_at(RGB_GREEN, 0);
+//             break;
+//         case 3:
+//             rgblight_setrgb_at(RGB_BLUE, 0);
+//             break;
+//     }
+// }
+// {{{1 Generated layout
 
 #include "sofle-layout.h"
 

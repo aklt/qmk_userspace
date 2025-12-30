@@ -3,6 +3,8 @@
 #    include "keymap.h"
 #endif
 
+// {{{1 Unicode Characters
+
 enum unicode_names {
     BANG,
     IRONY,
@@ -38,6 +40,24 @@ const uint32_t PROGMEM unicode_map[] = {
     [DK_OE_UPPER]   = 0x00D8,  // Ø
     [DK_AA_UPPER]   = 0x00C5,  // Å
 };
+
+// {{{1 Combos
+
+enum combos {
+    LSEMI_ENTER,
+    QW_ESC,
+};
+
+const uint16_t PROGMEM lsemi_enter[] = {KC_L, KC_SCLN, COMBO_END};
+const uint16_t PROGMEM qw_esc[] = {KC_Q, KC_W, COMBO_END};
+
+combo_t key_combos[] = {
+    [LSEMI_ENTER] = COMBO(lsemi_enter, KC_ENT),
+    [QW_ESC] = COMBO(qw_esc, KC_ESC),
+};
+
+
+// {{{1 Other
 
 #include "sofle-layout.h"
 

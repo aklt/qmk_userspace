@@ -21,8 +21,11 @@ while true; do
                 -e 's/KC_F18/UM(CAT)/g' \
                 -e 's/KC_F19/UM(SMILE)/g' \
                 -e 's/KC_F20/UM(UPSIDE)/g' \
-                sofle-layout.json > ./keyboards/splitkb/aurora/sofle_v2/keymaps/vial/sofle-build.json
-            qmk json2c ./keyboards/splitkb/aurora/sofle_v2/keymaps/vial/sofle-build.json -o keyboards/splitkb/aurora/sofle_v2/keymaps/vial/sofle-layout.h
+                -e 's/KC_F21/UC_LINX/g' \
+                -e 's/KC_F22/UC_MAC/g' \
+                -e 's/KC_F23/UC_WIN/g' \
+                sofle-layout.json > ./keyboards/splitkb/aurora/sofle_v2/keymaps/aklt_keymap/sofle-build.json
+            qmk json2c ./keyboards/splitkb/aurora/sofle_v2/keymaps/aklt_keymap/sofle-build.json -o keyboards/splitkb/aurora/sofle_v2/keymaps/aklt_keymap/sofle-layout.h
             ;;
         *)
             echo "Unknown file created: $NEWFILE"
