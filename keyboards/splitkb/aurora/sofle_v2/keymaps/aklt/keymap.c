@@ -373,8 +373,8 @@ void keyboard_post_init_user() {
     // debug_mouse=true;
 
     // Initialize RGB to static black
-    // rgblight_enable_noeeprom();
-    // rgblight_sethsv_noeeprom(HSV_BLACK);
+    rgblight_enable_noeeprom();
+    rgblight_sethsv_noeeprom(HSV_BLACK);
     // rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
 }
 
