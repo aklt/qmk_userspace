@@ -13,9 +13,6 @@
 void keyboard_pre_init_user(void) {
     gpio_set_pin_output(24);
     gpio_write_pin_high(24);
-    // Set the TMK/QMK EEPROM state as invalid
-    eeconfig_disable();
-    rgb_matrix_set_color_all(0x2f, 0x33, 0x34);
 }
 
 // {{{1 RGB Matrix
@@ -303,10 +300,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return res; // Process all other keycodes normally
 }
 
-// void matrix_init_kb(void)
-// void matrix_scan_kb(void)
-
-#define MASTER_LED_COUNT 29
+#define MASTER_LED_COUNT 35
 
 // bool led_update_kb(led_t led_state)
 void set_led(uint8_t index, uint8_t red, uint8_t green, uint8_t blue) {
@@ -364,8 +358,6 @@ void keyboard_post_init_user() {
     layer_on(BASE_QWERTY);
     layer_on(OVERLAY_NUM);
 
-    rgb_matrix_set_color_all(0x2f, 0xc3, 0xf4);
-
     // Debug
     debug_enable = true;
     // debug_matrix=true;
@@ -373,9 +365,8 @@ void keyboard_post_init_user() {
     // debug_mouse=true;
 
     // Initialize RGB to static black
-    rgblight_enable_noeeprom();
-    rgblight_sethsv_noeeprom(HSV_BLACK);
-    // rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+    rgb_matrix_enable_noeeprom();
+    rgb_matrix_sethsv_noeeprom(HSV_BLACK);
 }
 
 // layer_state_t layer_state_set_user(layer_state_t state) {
@@ -383,26 +374,14 @@ void keyboard_post_init_user() {
 //   return state;
 // }
 
-void housekeeping_task_user(void) {
-        set_led(theColor, 255, 33, 44);
-        set_led(36, 255, 33, 44);
-        // dprintf("Color index: %d, master: %d\n", theColor, is_keyboard_master());
+bool rgb_matrix_indicators_user(void) {
+    rgb_matrix_set_color(theColor, 22, 33, 223);
+    return false;
+}
 
-    // switch (get_highest_layer(layer_state | default_layer_state)) {
-    //  //   case 0:
-    //         // Default layer
-    //         rgblight_setrgb_at(RGB_BLACK, 0);
-    //         break;
-    //     case 1:
-    //         rgblight_setrgb_at(RGB_RED, 0);
-    //         break;
-    //     case 2:
-    //         rgblight_setrgb_at(RGB_GREEN, 0);
-    //         break;
-    //     case 3:
-    //         rgblight_setrgb_at(RGB_BLUE, 0);
-    //         break;
-    // }
+void housekeeping_task_user(void) {
+    rgb_matrix_set_color(1, 255, 0, 0);
+    rgb_matrix_set_color(36, 0, 255, 44);
 }
 
 // {{{1 Combos
@@ -452,32 +431,6 @@ void leader_end_user(void) {
     } else if (leader_sequence_one_key(KC_2)) {
         SEND_STRING(SS_LGUI("r") "cmd\n" SS_LCTL("c"));
     }
-}
-
-// {{{1 RGB Matrix Indicators
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-
-
-        // if (get_highest_layer(layer_state) > 0) {
-        // uint8_t layer = get_highest_layer(layer_state);
-        //
-        //
-        // for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-        //     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-        //         uint8_t index = g_led_config.matrix_co[row][col];
-        //
-        //         if (index > 35) {
-        //             index = index - 35;
-        //         }
-        //
-        //         if (index >= led_min && index < led_max && index != NO_LED &&
-        //         keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS) {
-        //             RGB_MATRIX_INDICATOR_SET_COLOR(index, 255, 255, 255);
-        //         }
-        //     }
-        // }
-    // }
-    return false;
 }
 
 // {{{1 TODO Split Mod-Tap Defer - This interfered somehow with layers
