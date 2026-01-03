@@ -44,7 +44,8 @@ CONSOLE_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 
 # Unicode keys
-UNICODE_ENABLE = no
+UNICODE_ENABLE = yes
+UNICODE_COMMON = yes
 UNICODEMAP_ENABLE = yes
 
 # Combos

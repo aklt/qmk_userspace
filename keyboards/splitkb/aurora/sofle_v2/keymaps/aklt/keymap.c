@@ -80,10 +80,12 @@ enum custom_keycodes {
 #define CK_FKEY TG(OVERLAY_FN)
 
 #define L1_LEAD LT(L1_NAV, KC_ENT)
-#define L2_I    MT(MOD_LGUI, KC_ESC)
+#define L2_SPEC LT(L2, KC_DEL)
 #define L3_D    LT(L3, KC_DEL)
 #define L4_S    LT(L4, KC_SPC)
 #define L5_F    TG(L5)
+
+#define GUI_ESC    MT(MOD_LGUI, KC_ESC)
 
 #define LC_Z LCTL(KC_Z)
 #define LC_X LCTL(KC_X)
@@ -111,11 +113,11 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE_SOFLE] = LAYOUT(
-        KC_GRV,  _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_BSPC,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
         KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, SC_SENT,
         KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE, KC_TAB,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RCTL_T(KC_QUOT),
-                          KC_LGUI, KC_LALT, L3_D,    L2_I,    L1_LEAD, L4_S,    L5_F,    KC_APP,  KC_RGUI, KC_RGUI
+                          KC_LGUI, KC_LALT, L3_D,    L2_SPEC, L1_LEAD, L4_S,    GUI_ESC, L5_F,    KC_APP,  KC_RGUI
     ),
     [BASE_QWERTY] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
@@ -139,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _______, _______, _______, KC_TAB,  KC_SPC,  _______, _______, _______, _______, _______
     ),
     [OVERLAY_NUMPAD] = LAYOUT(
-        CK_COLO, _______, _______, _______, _______, _______,                   XXXXXXX, KC_PEQL, KC_PSLS, KC_PAST, XXXXXXX, KC_BSPC,
+        CK_COLO, _______, _______, _______, _______, _______,                   CK_COLO, KC_PEQL, KC_PSLS, KC_PAST, XXXXXXX, KC_BSPC,
         _______, _______, _______, _______, _______, _______,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   XXXXXXX, KC_PMNS,
         _______, _______, _______, _______, _______, _______,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PENT, KC_PPLS,
         _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_PCMM,
@@ -175,16 +177,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [L1_NAV] = LAYOUT(
         KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS, KC_MINS, KC_EQL,
-        KC_INS,  _______, _______, _______, _______, KC_CAPS,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_LBRC, KC_RBRC,
+        KC_INS,  _______, _______, _______, _______, KC_CAPS,                   KC_HOME, KC_END,  S(KC_9), S(KC_0), KC_LBRC, KC_RBRC,
         KC_DEL,  _______, _______, _______, _______, KC_NUM,                    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_LCBR, KC_RCBR,
-        _______, _______, _______, _______, _______, KC_SCRL, _______, _______, CC_LEFT, CC_DOWN, CC_UP,   CC_RIGH, LSFT(KC_SLSH), LSFT(KC_QUOT),
+        _______, _______, _______, _______, _______, KC_SCRL, _______, _______, CC_LEFT, KC_PGDN, KC_PGUP, CC_RIGH, LSFT(KC_SLSH), LSFT(KC_QUOT),
                           _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
     [L2] = LAYOUT(
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     _______, KC_NUM,  KC_PAST, KC_LGUI, KC_UNDS, KC_PLUS,
         KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_PGUP, KC_P7,   KC_P8,   KC_P9,   KC_LCTL, DA_AA,
         _______, _______, _______, _______, _______, _______,                   KC_B,    _______, _______, KC_W,    DA_OE,   DA_AE,
-        _______, LC_Z,    LC_X,    LC_C,    LC_V ,   _______, _______, _______, UM(CAT), KC_P1,     KC_P2, KC_P3,   KC_PEQL,
+        _______, LC_Z,    LC_X,    LC_C,    LC_V ,   _______, _______, _______, UM(CAT), KC_P1,   UC_PREV, UC_NEXT, KC_PEQL,
                           KC_PENT, _______, _______, _______, _______, _______, _______, UM(SMILE), UM(UPSIDE), _______, _______
     ),
     [L3] = LAYOUT(
@@ -382,6 +384,7 @@ bool rgb_matrix_indicators_user(void) {
 void housekeeping_task_user(void) {
     rgb_matrix_set_color(1, 255, 0, 0);
     rgb_matrix_set_color(36, 0, 255, 44);
+    rgb_matrix_set_color(theColor, 0, 255, 44);
 }
 
 // {{{1 Combos
@@ -395,6 +398,7 @@ enum combos {
     IO_DEL,
     LSEMI_ENTER,
     DOTSLASH_BACKSLASH,
+    ZERO_BACKSPACE,
     TOGGLE_LAYER
 };
 
@@ -405,6 +409,7 @@ const uint16_t PROGMEM op_backspace[]       = {KC_O, KC_P, COMBO_END};
 const uint16_t PROGMEM io_del[]             = {KC_I, KC_O, COMBO_END};
 const uint16_t PROGMEM lsemi_enter[]        = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM dotslash_backslash[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM zero_backspace[]    =  {KC_0, KC_BSPC, COMBO_END};
 
 const uint16_t PROGMEM toggle_layer[] = {L1_LEAD, L4_S, COMBO_END};
 
@@ -415,6 +420,7 @@ combo_t key_combos[] = {
     [IO_DEL] = COMBO(io_del, KC_DEL),
     [LSEMI_ENTER] = COMBO(lsemi_enter, KC_ENT),
     [DOTSLASH_BACKSLASH] = COMBO(dotslash_backslash, KC_BSLS),
+    [ZERO_BACKSPACE] = COMBO(zero_backspace, KC_PLUS),
     [TOGGLE_LAYER] = COMBO(toggle_layer, LT(TOGGLE, KC_NO))
 };
 
