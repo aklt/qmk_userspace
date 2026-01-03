@@ -431,6 +431,7 @@ void leader_start_user(void) {
     println("Leader started");
 }
 
+#ifdef LEADER_ENABLE
 void leader_end_user(void) {
     if (leader_sequence_one_key(KC_1)) {
         SEND_STRING(SS_LCTL(SS_LSFT("t")));
@@ -438,6 +439,7 @@ void leader_end_user(void) {
         SEND_STRING(SS_LGUI("r") "cmd\n" SS_LCTL("c"));
     }
 }
+#endif // LEADER_ENABLE
 
 // {{{1 TODO Split Mod-Tap Defer - This interfered somehow with layers
 // smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {

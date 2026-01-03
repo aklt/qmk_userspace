@@ -15,7 +15,7 @@ ENABLE_SEND_STRING = yes
 #TAP_DANCE_ENABLE = yes
 
 # Leader key
-LEADER_ENABLE = yes
+# LEADER_ENABLE = yes
 
 # KEY_LOCK_ENABLE = yes
 
@@ -44,7 +44,6 @@ CONSOLE_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 
 # Unicode keys
-UNICODE_ENABLE = yes
 UNICODE_COMMON = yes
 UNICODEMAP_ENABLE = yes
 
