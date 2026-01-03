@@ -376,7 +376,7 @@ void keyboard_post_init_user() {
 
 bool rgb_matrix_indicators_user(void) {
     rgb_matrix_set_color(theColor, 22, 33, 223);
-    return false;
+    return true;
 }
 
 void housekeeping_task_user(void) {
