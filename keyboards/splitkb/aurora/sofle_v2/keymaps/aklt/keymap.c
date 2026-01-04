@@ -366,6 +366,7 @@ enum combos {
     DOTSLASH_BACKSLASH,
     ZERO_BACKSPACE,
     CAPS_WORD,
+    MINUS,
     TOGGLE_LAYER
 };
 
@@ -378,6 +379,7 @@ const uint16_t PROGMEM lsemi_enter[]        = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM dotslash_backslash[] = {KC_DOT, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM zero_backspace[]     = {KC_0, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM caps_word[]          = {KC_LSFT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM zero_nine[]          = {KC_0, KC_9, COMBO_END};
 
 const uint16_t PROGMEM toggle_layer[] = {L1_LEAD, L4_S, COMBO_END};
 
@@ -390,6 +392,7 @@ combo_t key_combos[] = {
     [DOTSLASH_BACKSLASH] = COMBO(dotslash_backslash, KC_BSLS),
     [ZERO_BACKSPACE] = COMBO(zero_backspace, KC_PLUS),
     [CAPS_WORD] = COMBO(caps_word, CK_CAPS),
+    [MINUS] = COMBO(zero_nine, KC_MINUS),
     [TOGGLE_LAYER] = COMBO(toggle_layer, LT(TOGGLE, KC_NO))
 };
 
