@@ -20,11 +20,9 @@ Clusters:
 
 ## Tasks
 
+- COMBO definitions
 - print OS in display
-
-- move words, select words
-
-
+- Words move and select
 
 ## Layers
 
@@ -36,8 +34,6 @@ Clusters:
     - Browser
     - RGB
     - BOTH Keys: cycle Qwerty / Colemak / Gaming
-
- 
 
 ## Inspiration
 

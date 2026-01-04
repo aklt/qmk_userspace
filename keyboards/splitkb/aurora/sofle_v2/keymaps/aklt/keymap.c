@@ -6,14 +6,7 @@
 static char DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
 static os_variant_t DetectedOs = OS_UNSURE;
 
-// {{{1 LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
-void keyboard_pre_init_user(void) {
-    gpio_set_pin_output(24);
-    gpio_write_pin_high(24);
-}
-
 // {{{1 Unicode Characters
-
 enum unicode_names { BANG, IRONY, SNEK, ROLL, CAT, SMILE, UPSIDE, WINK, LOVE, DK_AE, DK_OE, DK_AA, DK_AE_UPPER, DK_OE_UPPER, DK_AA_UPPER };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -162,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  ____QWERTY_LEFT_1__________________________,                   ____QWERTY_RIGHT_1_________________________, KC_BSLS,
         KC_LSFT, ____QWERTY_LEFT_2__________________________,                   ____QWERTY_RIGHT_2_________________________, SC_SENT,
         KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_NO,   ____QWERTY_RIGHT_3_________________________, KC_RCTL,
-                          KC_LGUI, LT(3,KC_PLUS), KC_LALT, LT(2,KC_INS), KC_SPC, LT(1,KC_SPC), KC_RGUI, KC_APP, LT(4,KC_LBRC), RGUI_T(KC_QUES)
+                          ____TRANS_10____________________________________________________________________________
     )
 };
 
@@ -186,6 +179,29 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [L5] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)}
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
+
+// {{{1 QMK Hooks
+// LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
+void keyboard_pre_init_user(void) {
+    gpio_set_pin_output(24);
+    gpio_write_pin_high(24);
+}
+
+void keyboard_post_init_user() {
+    layer_on(BASE_QWERTY);
+    layer_on(OVERLAY_NUM);
+
+    // Debug
+    debug_enable = true;
+    // debug_matrix=true;
+    // debug_keyboard = true;
+    // debug_mouse=true;
+
+    // Initialize RGB to static black
+    rgb_matrix_enable_noeeprom();
+    rgb_matrix_sethsv_noeeprom(HSV_BLACK);
+}
+
 
 // {{{1 Functions
 
@@ -321,22 +337,6 @@ void set_led(uint8_t index, uint8_t red, uint8_t green, uint8_t blue) {
 //     }
 // }
 
-// {{{1 QMK Hooks
-void keyboard_post_init_user() {
-    layer_on(BASE_QWERTY);
-    layer_on(OVERLAY_NUM);
-
-    // Debug
-    debug_enable = true;
-    // debug_matrix=true;
-    // debug_keyboard = true;
-    // debug_mouse=true;
-
-    // Initialize RGB to static black
-    rgb_matrix_enable_noeeprom();
-    rgb_matrix_sethsv_noeeprom(HSV_BLACK);
-}
-
 // layer_state_t layer_state_set_user(layer_state_t state) {
 //   state = update_tri_layer_state(state, L1_NAV, L4, TOGGLE);
 //   return state;
@@ -470,15 +470,19 @@ bool process_detected_host_os_user(os_variant_t detected_os) {
     switch (detected_os) {
         case OS_MACOS:
         case OS_IOS:
+            set_unicode_input_mode(UNICODE_MODE_MACOS);
             strncpy(DetectedOsName, "MacOS/iOS", 10);
             break;
         case OS_WINDOWS:
+            set_unicode_input_mode(UNICODE_MODE_WINDOWS);
             strncpy(DetectedOsName, "Windows", 8);
             break;
         case OS_LINUX:
+            set_unicode_input_mode(UNICODE_MODE_LINUX);
             strncpy(DetectedOsName, "Linux", 6);
             break;
         case OS_UNSURE:
+            set_unicode_input_mode(UNICODE_MODE_LINUX);
             strncpy(DetectedOsName, "Unsure", 7);
             break;
         default:
