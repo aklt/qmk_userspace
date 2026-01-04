@@ -1,5 +1,5 @@
 #include QMK_KEYBOARD_H
-#include "layout_macro.h"
+#include "macros.h"
 
 #include "transactions.h"
 #include "quantum.h"

@@ -61,56 +61,13 @@ enum custom_keycodes {
     NOT_A_KEY,
 };
 
-// Default layers
-#define DF_GAME DF(BASE_GAMING)
-#define DF_QWER DF(BASE_QWERTY)
-#define DF_COLE DF(BASE_COLEMAK_DH)
-
-// Toggle layers
-#define CK_MOUS TG(OVERLAY_MOUSE)
-#define CK_NKEY TG(OVERLAY_NUMPAD)
-#define CK_FKEY TG(OVERLAY_FN)
-
-#define L1_LEAD LT(L1_NAV, KC_ENT)
-#define L2_SPEC LT(L2, KC_DEL)
-#define L3_D    LT(L3, KC_DEL)
-#define L4_S    LT(L4, KC_SPC)
-#define L5_F    TG(L5)
-
-#define GUI_ESC    MT(MOD_LGUI, KC_ESC)
-
-#define LC_Z LCTL(KC_Z)
-#define LC_X LCTL(KC_X)
-#define LC_C LCTL(KC_C)
-#define LC_V LCTL(KC_V)
-
-#define DA_AE UP(DK_AE, DK_AE_UPPER)
-#define DA_OE UP(DK_OE, DK_OE_UPPER)
-#define DA_AA UP(DK_AA, DK_AA_UPPER)
-
-#define CC_UP C(KC_UP)
-#define CC_DOWN C(KC_DOWN)
-#define CC_LEFT C(KC_LEFT)
-#define CC_RIGH C(KC_RIGHT)
-
-    /*
-    [BASE_SOFLE] = LAYOUT(
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-    ),
-    */
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE_SOFLE] = LAYOUT_MACRO(
         KC_GRV,  ____QWERTY_NUM_LEFT________________________,                  ____QWERTY_NUM_RIGHT_______________________, KC_BSPC,
         KC_TAB,  ____QWERTY_LEFT_1__________________________,                  ____QWERTY_RIGHT_1_________________________, KC_BSLS,
         KC_LSFT, ____QWERTY_LEFT_2__________________________,                  ____QWERTY_RIGHT_2_________________________, SC_SENT,
         KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_TAB, ____QWERTY_RIGHT_3_________________________, RCTL_T(KC_QUOT),
-                          KC_LGUI, KC_LALT, L3_D,    L2_SPEC, L1_LEAD, L4_S,   GUI_ESC, L5_F,    KC_APP,  KC_RGUI
+                          KC_LGUI, L3_D,  L2_ESC,    KC_LALT, L1_LEAD, L4_S,   GUI_DEL, L5_F,    KC_APP,  KC_RGUI
     ),
     [BASE_QWERTY] = LAYOUT_MACRO(
         ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
