@@ -14,7 +14,9 @@ ENABLE_SEND_STRING = yes
 
 # Tri Layer
 # TRI_LAYER_ENABLE = yes
-# OS_DETECTION_ENABLE = yes
+
+# https://docs.qmk.fm/features/os_detection
+OS_DETECTION_ENABLE = yes
 
 # Tap Dance
 #TAP_DANCE_ENABLE = yes

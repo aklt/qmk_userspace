@@ -7,6 +7,7 @@
 #   define OLED_FONT_H "keyboards/splitkb/aurora/sofle_v2/glcdfont.c"
 #endif
 
+// allows the report callbacks to be called only once, when the OS detection result is considered stable
 #define OS_DETECTION_SINGLE_REPORT
 
 // Turn off controller LED - See https://docs.splitkb.com/product-guides/liatris/power-led

@@ -1,8 +1,10 @@
 
 #include "aklt.h"
 
+// {{{1 Globals
 #define MAX_DETECTED_OS_LENGTH 10
-static char DetectedOS[MAX_DETECTED_OS_LENGTH] = "Unknown";
+static char DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
+static os_variant_t DetectedOs = OS_UNSURE;
 
 // {{{1 LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
 void keyboard_pre_init_user(void) {
@@ -251,7 +253,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // }
     if (record->event.pressed) {
         // Handle key press
-        dprintf("Layer %032b %032b %s\n", layer_state, default_layer_state, get_keycode_string(keycode));
+        dprintf("OS %s, Layer %032b %032b, Key %s\n", DetectedOsName, layer_state, default_layer_state, get_keycode_string(keycode));
     } else {
         // Handle key release
     }
@@ -451,22 +453,23 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 // {{{1 Os Detection
 bool process_detected_host_os_user(os_variant_t detected_os) {
+    DetectedOs = detected_os;
     switch (detected_os) {
         case OS_MACOS:
         case OS_IOS:
-            strncpy(DetectedOS, "MacOS/iOS", 10);
+            strncpy(DetectedOsName, "MacOS/iOS", 10);
             break;
         case OS_WINDOWS:
-            strncpy(DetectedOS, "Windows", 8);
+            strncpy(DetectedOsName, "Windows", 8);
             break;
         case OS_LINUX:
-            strncpy(DetectedOS, "Linux", 6);
+            strncpy(DetectedOsName, "Linux", 6);
             break;
         case OS_UNSURE:
-            strncpy(DetectedOS, "Unsure", 7);
+            strncpy(DetectedOsName, "Unsure", 7);
             break;
         default:
-            strncpy(DetectedOS, "Unknown", 8);
+            strncpy(DetectedOsName, "Unknown", 8);
             break;
     }
 
