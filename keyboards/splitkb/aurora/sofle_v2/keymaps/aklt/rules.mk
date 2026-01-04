@@ -1,4 +1,9 @@
 
+# Debugging
+# https://docs.qmk.fm/unit_testing#unit-testing
+KEYCODE_STRING_ENABLE = yes
+VARIABLE_TRACE = 1
+CONSOLE_ENABLE = yes
 
 # Encoder
 ENCODER_ENABLE = yes
@@ -36,10 +41,8 @@ BOOTMAGIC_ENABLE = yes
 SWAP_HANDS_ENABLE = yes
 
 # QMK
-DEFAULT_FOLDER = splitkb/aurora/sofle_v2/rev1
 CONVERT_TO=liatris
 RP2040_BOOTLOADER_DOUBLE_TAP_RESET = yes
-CONSOLE_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 
 # Unicode keys

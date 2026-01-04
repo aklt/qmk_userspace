@@ -7,8 +7,6 @@ void keyboard_pre_init_user(void) {
     gpio_write_pin_high(24);
 }
 
-// {{{1 RGB Matrix
-
 // {{{1 Unicode Characters
 
 enum unicode_names { BANG, IRONY, SNEK, ROLL, CAT, SMILE, UPSIDE, WINK, LOVE, DK_AE, DK_OE, DK_AA, DK_AE_UPPER, DK_OE_UPPER, DK_AA_UPPER };
@@ -250,7 +248,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // }
     if (record->event.pressed) {
         // Handle key press
-        dprintf("Layer %032b %032b\n", layer_state, default_layer_state);
+        dprintf("Layer %032b %032b %s\n", layer_state, default_layer_state, get_keycode_string(keycode));
     } else {
         // Handle key release
     }

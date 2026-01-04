@@ -12,16 +12,24 @@ Features:
 - Case-Word
 
 Principles:
+- vim HJKL
 
-- Directions are from the home row on RHS
-  Don't use vim HJKL
+Clusters:
+- LHS: Character and Editor navigation
+- RHS: WM and UI navigation
+
+## Tasks
+
+- print OS in display
+
+- move words, select words
+
 
 
 ## Layers
 
     - IDEA Tap left key to cycle right/left overlay layers and vice versa
   Layers
-    - Orbital mouse
     - Qwerty and Colemak
     - NUM / FN - Numbers and F keys
     - NUMPAD
@@ -29,8 +37,13 @@ Principles:
     - RGB
     - BOTH Keys: cycle Qwerty / Colemak / Gaming
 
+ 
+
 ## Inspiration
 
+  . https://github.com/drashna
+  . https://github.com/manna-harbour/miryoku
+  . https://github.com/skychil/kombol/tree/main
   . https://keymapdb.com/keymaps/ShamalLakshan/
   . https://github.com/TGPSKI/qmk_firmware/blob/tgpski-custom-keychron/keyboards/keychron/q0_max/encoder/keymaps/TGPSKI/keymap.c#L137
   . https://keymapdb.com/keymaps/default-ferris/
