@@ -7,7 +7,6 @@
 #   define OLED_FONT_H "keyboards/splitkb/aurora/sofle_v2/glcdfont.c"
 #endif
 
-#define OS_DETECTION_KEYBOARD_RESET
 #define OS_DETECTION_SINGLE_REPORT
 
 // Turn off controller LED - See https://docs.splitkb.com/product-guides/liatris/power-led

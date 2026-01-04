@@ -1,6 +1,9 @@
 
 #include "aklt.h"
 
+#define MAX_DETECTED_OS_LENGTH 10
+static char DetectedOS[MAX_DETECTED_OS_LENGTH] = "Unknown";
+
 // {{{1 LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
 void keyboard_pre_init_user(void) {
     gpio_set_pin_output(24);
@@ -443,5 +446,29 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_PGUP);
         }
     }
+    return false;
+}
+
+// {{{1 Os Detection
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    switch (detected_os) {
+        case OS_MACOS:
+        case OS_IOS:
+            strncpy(DetectedOS, "MacOS/iOS", 10);
+            break;
+        case OS_WINDOWS:
+            strncpy(DetectedOS, "Windows", 8);
+            break;
+        case OS_LINUX:
+            strncpy(DetectedOS, "Linux", 6);
+            break;
+        case OS_UNSURE:
+            strncpy(DetectedOS, "Unsure", 7);
+            break;
+        default:
+            strncpy(DetectedOS, "Unknown", 8);
+            break;
+    }
+
     return false;
 }
