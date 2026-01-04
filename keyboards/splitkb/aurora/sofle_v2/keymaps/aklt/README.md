@@ -21,6 +21,7 @@ Clusters:
 ## Tasks
 
 - COMBO definitions
+- Use Eurkey across mac and Linux
 - print OS in display
 - Words move and select
 

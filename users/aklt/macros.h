@@ -32,7 +32,7 @@
 #define L2_ESC  LT(L2, KC_ESC)
 #define L3_D    LT(L3, KC_DEL)
 #define L4_S    LT(L4, KC_SPC)
-#define L5_F    TG(L5)
+#define L5_F    LT(L5)
 
 #define GUI_DEL    MT(MOD_LGUI, KC_DEL)
 
