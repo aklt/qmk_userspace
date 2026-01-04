@@ -61,6 +61,7 @@ enum custom_keycodes {
     CK_FLAS,           // bootloader
     CK_CONS,           // console
     CK_LINT,           // lint
+    CK_CAPS,           // Toggle Caps Word
     NOT_A_KEY,
 };
 
@@ -233,6 +234,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 res = false;
             }
             break;
+        case CK_CAPS:
+            if (record->event.pressed) {
+                caps_word_toggle();
+                res = false;
+            }
+            break;
         case CK_CONS:
             if (record->event.pressed) {
                 SEND_STRING("qmk console");
@@ -358,6 +365,7 @@ enum combos {
     LSEMI_ENTER,
     DOTSLASH_BACKSLASH,
     ZERO_BACKSPACE,
+    CAPS_WORD,
     TOGGLE_LAYER
 };
 
@@ -368,7 +376,8 @@ const uint16_t PROGMEM op_backspace[]       = {KC_O, KC_P, COMBO_END};
 const uint16_t PROGMEM io_del[]             = {KC_I, KC_O, COMBO_END};
 const uint16_t PROGMEM lsemi_enter[]        = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM dotslash_backslash[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM zero_backspace[]    =  {KC_0, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM zero_backspace[]     = {KC_0, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM caps_word[]          = {KC_LSFT, KC_BSPC, COMBO_END};
 
 const uint16_t PROGMEM toggle_layer[] = {L1_LEAD, L4_S, COMBO_END};
 
@@ -380,6 +389,7 @@ combo_t key_combos[] = {
     [LSEMI_ENTER] = COMBO(lsemi_enter, KC_ENT),
     [DOTSLASH_BACKSLASH] = COMBO(dotslash_backslash, KC_BSLS),
     [ZERO_BACKSPACE] = COMBO(zero_backspace, KC_PLUS),
+    [CAPS_WORD] = COMBO(caps_word, CK_CAPS),
     [TOGGLE_LAYER] = COMBO(toggle_layer, LT(TOGGLE, KC_NO))
 };
 

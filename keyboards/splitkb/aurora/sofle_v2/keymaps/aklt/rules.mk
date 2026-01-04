@@ -56,3 +56,6 @@ UNICODEMAP_ENABLE = yes
 
 # Combos
 COMBO_ENABLE = yes
+
+# Caps Word
+CAPS_WORD_ENABLE = yes
