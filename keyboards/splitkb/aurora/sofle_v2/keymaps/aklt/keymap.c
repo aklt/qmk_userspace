@@ -194,14 +194,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, UC_WIN,  _______, _______, _______,                   _______, _______, _______, _______, EE_CLR,  CK_FLAS,
         ____TRANS_6_________________________________________,                   _______, _______, _______, _______, _______, CK_CONS,
         ____TRANS_6_________________________________________, _______, _______, _______, _______, _______, _______, _______, CK_LINT,
-                 _______, _______, _______, _______, DF(0),   _______, _______, _______, _______, _______
+                          _______, _______, _______, _______, DF(0),   _______, _______, _______, _______, _______
     ),
     [L5] = LAYOUT_MACRO(
         KC_ESC,  ____QWERTY_NUM_LEFT________________________,                   ____QWERTY_NUM_RIGHT_______________________, KC_BSPC,
         KC_TAB,  ____QWERTY_LEFT_1__________________________,                   ____QWERTY_RIGHT_1_________________________, KC_BSLS,
         KC_LSFT, ____QWERTY_LEFT_2__________________________,                   ____QWERTY_RIGHT_2_________________________, SC_SENT,
         KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_NO,   ____QWERTY_RIGHT_3_________________________, KC_RCTL,
-                 KC_LGUI, LT(3,KC_PLUS), KC_LALT, LT(2,KC_INS), KC_SPC, LT(1,KC_SPC), KC_RGUI, KC_APP, LT(4,KC_LBRC), RGUI_T(KC_QUES)
+                          KC_LGUI, LT(3,KC_PLUS), KC_LALT, LT(2,KC_INS), KC_SPC, LT(1,KC_SPC), KC_RGUI, KC_APP, LT(4,KC_LBRC), RGUI_T(KC_QUES)
     )
 };
 
