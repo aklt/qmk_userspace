@@ -41,6 +41,8 @@ Clusters:
 
 ## Inspiration
 
+  . https://dreymar.colemak.org/
+  . https://stevep99.github.io/seniply/
   . https://github.com/drashna
   . https://github.com/manna-harbour/miryoku
   . https://github.com/skychil/kombol/tree/main

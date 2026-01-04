@@ -223,7 +223,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case CK_FLAS:
             if (record->event.pressed) {
-                SEND_STRING("qmk flash --keyboard splitkb/aurora/sofle_v2 --keymap aklt\n");
+                SEND_STRING("qmk flash --keyboard splitkb/aurora/sofle_v2/rev1 --keymap aklt\n");
                 res = false;
             }
             break;
