@@ -37,7 +37,7 @@ Clusters:
     - BOTH Keys: cycle Qwerty / Colemak / Gaming
 
 ## Inspiration
-
+ https://github.com/HellSingCoder/qmk_firmware/tree/33d7fa1180d232dcdb024c68a8f4629dced32afb/keyboards/sofle/keymaps/helltm
   . https://dreymar.colemak.org/
   . https://stevep99.github.io/seniply/
   . https://github.com/drashna

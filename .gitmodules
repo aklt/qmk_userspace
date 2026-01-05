@@ -4,3 +4,15 @@
 [submodule "modules/drashna"]
 	path = modules/drashna
 	url = https://github.com/drashna/qmk_modules.git
+[submodule "modules/dave-thompson"]
+	path = modules/dave-thompson
+	url = https://github.com/dave-thompson/qmk-modules
+[submodule "modules/dmyoung9"]
+	path = modules/dmyoung9
+	url = https://github.com/dmyoung9/qmk_modules.git
+[submodule "modules/elpekenin"]
+	path = modules/elpekenin
+	url = https://github.com/elpekenin/qmk_modules.git
+[submodule "modules/eynsai"]
+	path = modules/eynsai
+	url = https://github.com/eynsai/qmk_modules.git
