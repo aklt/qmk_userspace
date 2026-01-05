@@ -6,57 +6,32 @@
 static char DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
 static os_variant_t DetectedOs = OS_UNSURE;
 
-// {{{1 Unicode Characters
-enum unicode_names { BANG, IRONY, SNEK, ROLL, CAT, SMILE, UPSIDE, WINK, LOVE, DK_AE, DK_OE, DK_AA, DK_AE_UPPER, DK_OE_UPPER, DK_AA_UPPER };
+// {{{1 QMK Hooks
+// LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
+void keyboard_pre_init_user(void) {
+    gpio_set_pin_output(24);
+    gpio_write_pin_high(24);
+}
 
-const uint32_t PROGMEM unicode_map[] = {
-    [BANG]        = 0x203D,  // ‽
-    [IRONY]       = 0x2E2E,  // ⸮
-    [SNEK]        = 0x1F40D, // 🐍
-    [ROLL]        = 0x1F923, // 🤣
-    [CAT]         = 0x1F639, // 😹
-    [SMILE]       = 0x1F60A, // 😊
-    [UPSIDE]      = 0x1F643, // 🙃
-    [WINK]        = 0x1F602, // 😂
-    [LOVE]        = 0x1F60D, // 😍
-    [DK_AE]       = 0x00E6,  // æ
-    [DK_OE]       = 0x00F8,  // ø
-    [DK_AA]       = 0x00E5,  // å
-    [DK_AE_UPPER] = 0x00C6,  // Æ
-    [DK_OE_UPPER] = 0x00D8,  // Ø
-    [DK_AA_UPPER] = 0x00C5,  // Å
-};
+void keyboard_post_init_user() {
+    layer_on(BASE_QWERTY);
+    layer_on(OVERLAY_NUM);
 
-// {{{1 Keymap Layers
-//
-// clang-format off
-enum layers {
-    BASE_SOFLE = 0,
-    BASE_QWERTY,
-    BASE_COLEMAK_DH,
-    BASE_GAMING,
-    OVERLAY_NUMPAD,
-    OVERLAY_NUM,
-    OVERLAY_FN,
-    OVERLAY_MOUSE,
-    TOGGLE,
-    L1_NAV,
-    L2,
-    L3,
-    L4,
-    L5
-};
+    // Debug
+    debug_enable = true;
+    // debug_matrix=true;
+    // debug_keyboard = true;
+    // debug_mouse=true;
 
-enum custom_keycodes {
-    C_1 = QK_USER,
-    CK_REST,           // Reset Layout
-    CK_COLO,           // color toggle
-    CK_FLAS,           // bootloader
-    CK_CONS,           // console
-    CK_LINT,           // lint
-    CK_CAPS,           // Toggle Caps Word
-    NOT_A_KEY,
-};
+    // Initialize RGB to static black
+    rgb_matrix_enable_noeeprom();
+    rgb_matrix_sethsv_noeeprom(HSV_BLACK);
+}
+
+// NOTE set_single_default_layer(default_layer);
+
+static uint8_t theColor = -10;
+// {{{1 Mapping
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE_SOFLE] = LAYOUT_MACRO(
@@ -159,8 +134,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-// {{{1 TODO Encoder Map
-
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [BASE_SOFLE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
@@ -180,43 +153,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
-// {{{1 QMK Hooks
-// LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
-void keyboard_pre_init_user(void) {
-    gpio_set_pin_output(24);
-    gpio_write_pin_high(24);
-}
-
-void keyboard_post_init_user() {
-    layer_on(BASE_QWERTY);
-    layer_on(OVERLAY_NUM);
-
-    // Debug
-    debug_enable = true;
-    // debug_matrix=true;
-    // debug_keyboard = true;
-    // debug_mouse=true;
-
-    // Initialize RGB to static black
-    rgb_matrix_enable_noeeprom();
-    rgb_matrix_sethsv_noeeprom(HSV_BLACK);
-}
-
-
-// {{{1 Functions
-
-// NOTE set_single_default_layer(default_layer);
-
-// {{{2 Vanilla
-void tap_cycle_layers(void) {
-    uint8_t current_layer = get_highest_layer(layer_state | default_layer_state);
-    uint8_t next_layer = (current_layer + 1) % 4; // Cycle through first 4 layers
-    layer_clear();
-    layer_on(next_layer);
-}
-
-static uint8_t theColor = -10;
-// static uint8_t colorIndex = 1;
 
 // hkeyboards/splitkb/aurora/sofle_v2/keymaps/aklt_keymap/README.mdttps://docs.qmk.fm/understanding_qmk#process-record
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -431,6 +367,9 @@ void leader_end_user(void) {
 
 // {{{1 TODO Displays
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_0;
+    }
     return OLED_ROTATION_270;
 }
 
@@ -442,7 +381,7 @@ bool oled_task_user(void) {
     return false;
 }
 
-// TODO Encoder
+// {{{1 TODO Encoder
 bool encoder_update_user(uint8_t index, bool clockwise) {
     // 0 is left-half encoder,
     // 1 is right-half encoder

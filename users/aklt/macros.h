@@ -1,5 +1,4 @@
-#ifndef LAYOUT_MACRO_H
-#define LAYOUT_MACRO_H
+#pragma once
 
 #include QMK_KEYBOARD_H
 
@@ -14,7 +13,6 @@
 */
 
 // Expand nested macros before passing to LAYOUT
-// Idea: https://github.com/drashna/qmk_userspace/blob/master/users/drashna/keyrecords/wrappers.h
 #define LAYOUT_MACRO(...) LAYOUT_MACRO_EXPAND(__VA_ARGS__)
 #define LAYOUT_MACRO_EXPAND(...) LAYOUT(__VA_ARGS__)
 
@@ -32,7 +30,7 @@
 #define L2_ESC  LT(L2, KC_ESC)
 #define L3_D    LT(L3, KC_DEL)
 #define L4_S    LT(L4, KC_SPC)
-#define L5_F    LT(L5)
+#define L5_F    LT(L5, KC_TAB)
 
 #define GUI_DEL    MT(MOD_LGUI, KC_DEL)
 
@@ -40,6 +38,9 @@
 #define LC_X LCTL(KC_X)
 #define LC_C LCTL(KC_C)
 #define LC_V LCTL(KC_V)
+
+// Unicode Characters
+enum unicode_names { BANG, IRONY, SNEK, ROLL, CAT, SMILE, UPSIDE, WINK, LOVE, DK_AE, DK_OE, DK_AA, DK_AE_UPPER, DK_OE_UPPER, DK_AA_UPPER };
 
 #define DA_AE UP(DK_AE, DK_AE_UPPER)
 #define DA_OE UP(DK_OE, DK_OE_UPPER)
@@ -90,4 +91,32 @@
 #define ____XXXXX_6_________________________________________ \
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
-#endif // LAYOUT_MACRO_H
+// clang-format off
+enum layers {
+    BASE_SOFLE = 0,
+    BASE_QWERTY,
+    BASE_COLEMAK_DH,
+    BASE_GAMING,
+    OVERLAY_NUMPAD,
+    OVERLAY_NUM,
+    OVERLAY_FN,
+    OVERLAY_MOUSE,
+    TOGGLE,
+    L1_NAV,
+    L2,
+    L3,
+    L4,
+    L5
+};
+
+enum custom_keycodes {
+    C_1 = QK_USER,
+    CK_REST,           // Reset Layout
+    CK_COLO,           // color toggle
+    CK_FLAS,           // bootloader
+    CK_CONS,           // console
+    CK_LINT,           // lint
+    CK_CAPS,           // Toggle Caps Word
+    NOT_A_KEY,
+};
+
