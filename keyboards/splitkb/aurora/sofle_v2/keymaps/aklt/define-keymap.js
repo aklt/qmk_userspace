@@ -1,30 +1,113 @@
+// TODO letterToKeycode and vice versa
+// TODO define combos
 
 // Generate a QMK keymap using a template and definitions for keys
 
-// Keys on the Sweep and Sofle keyboards: kXX
-// Keys only on the Sofle v2 keyboard: sXX
+// Keys
+// SXX: Sofle only
+// KXX: Kyria only
+// aXX: Sofle + Kyria
+// bXX: Sofle + Kyria + Sweep
+import { toKeycode } from './letterToKeycode.js';
 
 const keymapTemplate = `
-s00, s01, s02, s03, s04, s05,           s06, s07, s08, s09, s10, s11,
-s12, k00, k01, k02, k03, k04,           k05, k06, k07, k08, k09, s13,
-s14, k10, k11, k12, k13, k14,           k15, k16, k17, k18, k19, s15,
-s16, k20, k21, k22, k23, k24, s17, s18, k25, k26, k27, k28, k29, s19,
-          s20, s21, s22, k30, k31, k32, k33, s23, s24, s25
+S00 S01 S02 S03 S04 S05                 S06 S07 S08 S09 S10 S11
+a12 b13 b14 b15 b16 b17                 b18 b19 b20 b21 b22 a23
+a24 b25 b26 b27 b28 b29                 b30 b31 b32 b33 b34 a35
+a36 b37 b38 b39 b40 b41 a42 K43 K44 a45 b46 b47 b48 b49 b50 a51
+        a52 a53 a54 b55 b56         b57 b58 a59 a60 a61
 `;
 
 const transTemplate = `
-___, ___, ___, ___, ___, ___,           ___, ___, ___, ___, ___, ___,
-___, ___, ___, ___, ___, ___,           ___, ___, ___, ___, ___, ___,
-___, ___, ___, ___, ___, ___,           ___, ___, ___, ___, ___, ___,
-___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___,
-          ___, ___, ___, ___, ___, ___, ___, ___, ___, ___
+___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
+___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
+___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
+___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+        ___ ___ ___ ___ ___         ___ ___ ___ ___ ___
 `;
 
-const qwertyKeymap = `
-q w e r t           y u i o p
-a s d f g           h j k l ;
-z x c v b           n m , . /
+const define = {
+    layers: {
+      qwerty: {
+        left: `
+q w e r t
+a s d f g
+z x c v b
+`,
+        right: `
+y u i o p
+h j k l ;
+n m , . /
+`
+    },
+      fKeys: {
+          row: `F1 F2 F3 F4 F5 F6 F7 F8 F9 F10`,
+          combos: {
+              F11: ['F4', 'F5'],
+              F12: ['F6', 'F7'],
+          }
+      },
+      numbers: '1 2 3 4 5 6 7 8 9 0'
+    },
+    combos: {
+        // Left
+        qw: 'KC_ESC',
+        as: 'KC_SHIFT',
+        zx: 'KC_DEL',
+        we: 'KC_TAB',
+        sd: '|',
+        xc: 'KC_LCTL',
+        er: 'KC_LALT',
+        rt: 'KC_SPC',
+        fg: 'KC_SPC',
+        vb: 'KC_SPC',
+        // Right
+        yu: '+',
+        hj: '-',
+        nm: '*',
+        ui: '[',
+        jk: '(',
+        'm,': '{',
+        io: ']',
+        kl: ')',
+        ',.': '}',
+        op: 'KC_BSPC',
+        'l;': 'KC_ENT',
+        './': 'KC_RSFT',
+        // vertical
+        ik: 'pgup',
+        'k,': 'pgdn',
+        jm: 'home',
+        'l.': 'end',
+        uj: 'ins',
+        ol: 'del',
+    }
+};
+
+function defineCombos(comboDefinitions) {
+    const enumDef = [];
+    const comboDefs = [];
+    const combos = [];
+    Object.entries(comboDefinitions).forEach(([comboKeys, resultKey], i) => {
+        const enumName = `COMBO_${i}_${comboKeys.toUpperCase().replace(/\W/g, '_')}`;
+        const ksKeys = comboKeys.split('').map(k => toKeycode(k)).join(', ');
+        const definition = `const uint16_t PROGMEM def${enumName}[] = { ${ksKeys}, COMBO_END };`;
+        const comboDef = `  [${enumName}] = COMBO(def${enumName}, ${toKeycode(resultKey)})`;
+        enumDef.push(enumName);
+        comboDefs.push(definition);
+        combos.push(comboDef);
+    });
+    return `enum combos {
+    ${enumDef.join(',\n    ')}
+};
+${comboDefs.join('\n')}
+combo_t key_combos[] = {
+    ${combos.join(',\n    ')}
+};
 `;
+}
+
+console.log(defineCombos(define.combos));
 
 const colemakDHKeymap = `
 q w f p g           j l u y ;
@@ -32,14 +115,56 @@ a r s t d           h n e i o
 z x c v b           k m , . /
 `;
 
-const fullKeyboard = `
-esc       f1   f2   f3   f4     f5   f6   f7   f8     f9   f10  f11  f12       pscr slck pause
+const numbers = '1 2 3 4 5 6 7 8 9 0';
+const symbols = `- = [ ] \\ ; ' , . / \``
 
-\`     1    2    3    4    5    6    7    8    9    0    -    =    bspc        ins  home pgup      nlck /    *    -
-tab   q    w    e    r    t    y    u    i    o    p    [    ]    \\           del  end  pgdn      7    8    9    +
-caps  a    s    d    f    g    h    j    k    l    ;    '    entr                                 4    5    6
-lsft  z    x    c    v    b    n    m    ,    .    /    rsft                        up            1    2    3    entr
-lctl  lgui lalt           spc                 ralt rgui menu rctl                left down rght   0         .
+
+const keysTemplate = `
+esc  1   2    3    4   5             6   7   8    9    0    bsp
+tab  q   w    e    r   t             y   u   i    o    p    \\
+shl  a   s    d    f   g             h   j   k    l    ;    entr
+ctl  z   x    c    v   b             n   m   ,    .    /    ctr
+         opl  wil  l1  l2  spc rgui  r2  r1  wir  opr
+`;
+
+const horizontalCombosTemplate = `
+k00-k01 k01-k02 k02-k03 k03-k04         k05-k06 k06-k07 k07-k08 k08-k09
+k10-k11 k11-k12 k12-k13 k13-k14         k15-k16 k16-k17 k17-k18 k18-k19
+k20-k21 k21-k22 k22-k23 k23-k24         k25-k26 k26-k27 k27-k28 k28-k29
+                        k30-k31 k31-k32 k32-k33
+`
+
+const combos = {
+    'k00-k01': 'KC_ESC',
+};
+
+function templateReplaceKeys(template, newKeys = {}, defaultKey = 'KC_TRNS') {
+    const lines = template.trim().split('\n')
+    const keys = lines.map(line => line.trim().split(/\b/));
+    const replacedKeys = keys.map(row =>
+        row.map(key => {
+            const trimmedKey = key.trim();
+            if (trimmedKey === '') {
+                return key;
+            }
+            return newKeys[trimmedKey] || defaultKey;
+        })
+    );
+    return replacedKeys.map(row => row.join('')).join('\n');
+}
+
+// console.log(templateReplaceKeys(keymapTemplate))
+
+// console.log(keymapTemplate);
+
+const fullKeyboard = `
+esc   f1   f2   f3   f4     f5   f6   f7   f8     f9   f10  f11  f12          pscr slck pause
+
+\`    1    2    3    4    5    6    7    8    9    0    -    =    bspc        ins  home pgup      nlck  k/   k*  k-
+tab   q    w    e    r    t    y    u    i    o    p    [    ]    \\          del  end  pgdn      k7    k8   k9  k+
+caps  a    s    d    f    g    h    j    k    l    ;    '    entr                                 k4    k5   k6
+lsft  z    x    c    v    b    n    m    ,    .    /    rsft                        up            k1    k2   k3  kentr
+lctl  lgui lalt           spc                 ralt rgui menu rctl             left down rght      k0         k.
 `;
 
 // Additional key mappings for fullKeyboard that aren't basic alphanumeric/punctuation
