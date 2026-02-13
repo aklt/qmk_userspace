@@ -1,21 +1,24 @@
-// TODO letterToKeycode and vice versa
-// TODO define combos
-
 // Generate a QMK keymap using a template and definitions for keys
+//
+// Keyboards:
+//
+// Sofle using qmk
+// Kyria using qmk
+// Ferris using zmk
 
 // Keys
-// SXX: Sofle only
-// KXX: Kyria only
-// aXX: Sofle + Kyria
-// bXX: Sofle + Kyria + Sweep
+// sXX: Sofle only
+// kXX: Kyria only
+// eXX: Sofle + Kyria
+// fXX: Sofle + Kyria + Sweep
 import { toKeycode } from './letterToKeycode.js';
 
 const keymapTemplate = `
-S00 S01 S02 S03 S04 S05                 S06 S07 S08 S09 S10 S11
-a12 b13 b14 b15 b16 b17                 b18 b19 b20 b21 b22 a23
-a24 b25 b26 b27 b28 b29                 b30 b31 b32 b33 b34 a35
-a36 b37 b38 b39 b40 b41 a42 K43 K44 a45 b46 b47 b48 b49 b50 a51
-        a52 a53 a54 b55 b56         b57 b58 a59 a60 a61
+s00 s01 s02 s03 s04 s05                 s06 s07 s08 s09 s10 s11
+e12 f13 f14 f15 f16 f17                 f18 f19 f20 f21 f22 e23
+e24 f25 f26 f27 f28 f29                 f30 f31 f32 f33 f34 e35
+e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
+        s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61
 `;
 
 const transTemplate = `
@@ -25,6 +28,29 @@ ___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
 ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
         ___ ___ ___ ___ ___         ___ ___ ___ ___ ___
 `;
+
+function createSofleTemplate() {
+    return keymapTemplate.replace(/k\d{2}\s+/g, '')
+}
+
+function createKyriaTemplate() {
+    return keymapTemplate.replace(/s\d{2}\s+/g, '')
+}
+
+function createFerrisTemplate() {
+    return keymapTemplate.replace(/(s|k)\d{2}\s+/g, '')
+}
+
+function createTransTemplate(keyTemplate) {
+    return keyTemplate.replace(/\w{3}/g, '___')
+}
+
+const sofleTemplate = createSofleTemplate();
+const sofleTransTemplate = createTransTemplate(sofleTemplate);
+const kyriaTemplate = createKyriaTemplate();
+const kyriaTransTemplate = createTransTemplate(kyriaTemplate);
+const ferrisTemplate = createFerrisTemplate();
+const ferrisTransTemplate = createTransTemplate(ferrisTemplate);
 
 const define = {
     layers: {

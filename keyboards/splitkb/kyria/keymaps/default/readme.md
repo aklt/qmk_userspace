@@ -1,8 +1,5 @@
 # Kyria's Default Keymap
 
-
-    
-
 ![KLE render of the default Kyria keymap with QWERTY as the base layer. Layers are shown in sublegends.](https://i.ibb.co/RQZx2dY/default-kyria2.jpg)
 
 
@@ -209,7 +206,7 @@ Adjust Layer: Default layer settings, RGB
 |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
 |        |      |      |Dvorak|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
 |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-     |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
+|        |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
 `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
                        |      |      |      |      |      |  |      |      |      |      |      |
                        |      |      |      |      |      |  |      |      |      |      |      |
