@@ -12,6 +12,7 @@
 // eXX: Sofle + Kyria
 // fXX: Sofle + Kyria + Sweep
 import { toKeycode } from './letterToKeycode.js';
+import layers from './layers.js';
 
 const keymapTemplate = `
 s00 s01 s02 s03 s04 s05                 s06 s07 s08 s09 s10 s11
@@ -45,12 +46,22 @@ function createTransTemplate(keyTemplate) {
     return keyTemplate.replace(/\w{3}/g, '___')
 }
 
+function readLayerDefinition(layer) {
+    const lines = layer.trim().split('\n').filter(line => line.trim() !== '');
+    const entries = lines.map(line => line.trim().split(/\s+/));
+}
+
+function createLayers(layerDef, template) {
+}
+
 const sofleTemplate = createSofleTemplate();
 const sofleTransTemplate = createTransTemplate(sofleTemplate);
 const kyriaTemplate = createKyriaTemplate();
 const kyriaTransTemplate = createTransTemplate(kyriaTemplate);
 const ferrisTemplate = createFerrisTemplate();
 const ferrisTransTemplate = createTransTemplate(ferrisTemplate);
+
+
 
 const define = {
     layers: {
