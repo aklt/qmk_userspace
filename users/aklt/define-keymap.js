@@ -14,11 +14,13 @@
 import { toKeycode } from "./letterToKeycode.js";
 import layers from "./layers.js";
 
-const keymapTemplate = `s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
+const keymapTemplate = `
+s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
 e12 f13 f14 f15 f16 f17 --- --- --- --- f18 f19 f20 f21 f22 e23
 e24 f25 f26 f27 f28 f29 --- --- --- --- f30 f31 f32 f33 f34 e35
 e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
---- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---`;
+--- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---
+`;
 
 function createSofleTemplate() {
     return keymapTemplate.replace(/k\d{2}\s+/g, "");
@@ -60,10 +62,16 @@ function readLayerDefinitions(layers) {
     return layerDefs;
 }
 
-function formatLayerDefinitionPretty(name, layerDef, opt = {space: 8, code: false}) {
+function prefixWithString(str, prefix) {
+    return str
+        .split("\n")
+        .map((line) => prefix + line)
+        .join("\n");
+}
+
+function formatLayerDefinitionPretty(layerDef, opt = {space: 8, code: false}) {
     const space = opt.space || 8;
-    let template = keymapTemplate;
-    console.log(`Layer: ${name}`);
+    let template = keymapTemplate.split("\n").filter((line) => line.trim() !== "").join("\n");
     const keys = keymapTemplate.split(/\s+/).filter((k) => k.trim() !== "");
     keys.forEach((key) => {
         const k = layerDef[key] ? layerDef[key][0] : "---";
@@ -78,20 +86,21 @@ function formatLayerDefinitionPretty(name, layerDef, opt = {space: 8, code: fals
     });
     if (opt.code) {
         template = template.replace(/\b /g, ',').replace(/\b$/gm, ',');
-        template = `[${name}] = LAYOUT_MACRO(
-${template}
-        )`
     }
-    return template;
+    return prefixWithString(template, '   ');
 }
 
+function formatLayerDefinitionCode(name, layerDef) {
+    const code = formatLayerDefinitionPretty(layerDef, {code: true});
+    const comment = formatLayerDefinitionPretty(layerDef);
+    return `[${name}] = LAYOUT_MACRO(
+${comment.replace(/^../, '/*').replace(/..$/, '*/')}\n\n${code}
+)`;
+}
 
 const layerDefinitions = readLayerDefinitions(layers);
 
-console.log(formatLayerDefinitionPretty("BaseLayer", layerDefinitions.base));
-console.log(formatLayerDefinitionPretty("BaseLayer", layerDefinitions.base, {
-    code: true,
-}));
+console.log(formatLayerDefinitionCode("BaseLayer", layerDefinitions.base))
 console.log(layerDefinitions.base);
 
 function createLayers(layerDef, template) {
