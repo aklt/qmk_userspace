@@ -69,6 +69,37 @@ function prefixWithString(str, prefix) {
         .join("\n");
 }
 
+function templateForKb(kb) {
+    let matchKey = "s|k|e|f";
+    if (kb === "sofle") {
+        matchKey = "s|e|f";
+    } else if (kb === "kyria") {
+        matchKey = "k|e|f";
+    } else if (kb === "ferris") {
+        matchKey = "f";
+    } else {
+        throw new Error(`Unknown keyboard: ${kb}, need to be one of sofle, kyria, ferris`);
+    }
+    const re = new RegExp(`^${matchKey}`);
+    const lines = [];
+    keymapTemplate.split(/\n/g).forEach((line) => {
+        const newLine = [];
+        line.trim().split(/\s+/).filter((k) => k.trim() !== "").forEach((k) => {
+            if (re.test(k)) {
+                newLine.push(k);
+            } else {
+                newLine.push("---");
+            }
+        });
+        lines.push(newLine.join(" "));
+    });
+    return lines.join("\n");
+}
+
+console.log(templateForKb("ferris"));
+console.log(templateForKb("kyria"));
+console.log(templateForKb("sofle"));
+
 function formatLayerDefinitionPretty(layerDef, opt = {space: 8, code: false}) {
     const space = opt.space || 8;
     let template = keymapTemplate.split("\n").filter((line) => line.trim() !== "").join("\n");
@@ -90,7 +121,7 @@ function formatLayerDefinitionPretty(layerDef, opt = {space: 8, code: false}) {
     return prefixWithString(template, '   ');
 }
 
-function formatLayerDefinitionCode(name, layerDef) {
+function formatLayerDefinitionCode(name, layerDef, forKb = "k") {
     const code = formatLayerDefinitionPretty(layerDef, {code: true});
     const comment = formatLayerDefinitionPretty(layerDef);
     return `[${name}] = LAYOUT_MACRO(
