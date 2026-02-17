@@ -262,7 +262,11 @@ const keycodeToLetter = Object.fromEntries(
 );
 
 export function toKeycode(letter) {
-  return letterToKeycode[letter] || letter;
+  const code = letterToKeycode[letter];
+  if (!code) {
+    throw new Error(`Unknown letter: ${letter}`);
+  }
+  return code;
 }
 
 export function toLetter(keycode) {

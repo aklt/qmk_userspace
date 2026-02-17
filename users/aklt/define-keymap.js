@@ -14,21 +14,11 @@
 import { toKeycode } from "./letterToKeycode.js";
 import layers from "./layers.js";
 
-const keymapTemplate = `
-s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
+const keymapTemplate = `s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
 e12 f13 f14 f15 f16 f17 --- --- --- --- f18 f19 f20 f21 f22 e23
 e24 f25 f26 f27 f28 f29 --- --- --- --- f30 f31 f32 f33 f34 e35
 e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
---- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---
-`;
-
-const transTemplate = `
-___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
-___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
-___ ___ ___ ___ ___ ___                 ___ ___ ___ ___ ___ ___
-___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
-        ___ ___ ___ ___ ___         ___ ___ ___ ___ ___
-`;
+--- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---`;
 
 function createSofleTemplate() {
     return keymapTemplate.replace(/k\d{2}\s+/g, "");
@@ -70,22 +60,38 @@ function readLayerDefinitions(layers) {
     return layerDefs;
 }
 
-function formatLayerDefinition(name, layerDef, space = 7) {
+function formatLayerDefinitionPretty(name, layerDef, opt = {space: 8, code: false}) {
+    const space = opt.space || 8;
     let template = keymapTemplate;
     console.log(`Layer: ${name}`);
     const keys = keymapTemplate.split(/\s+/).filter((k) => k.trim() !== "");
     keys.forEach((key) => {
-        const k = layerDef[key] ? layerDef[key][0] : '---';
+        const k = layerDef[key] ? layerDef[key][0] : "---";
         template = template.replace(
             key,
-            typeof k === 'undefined' ? "_".repeat(space) : k === "---" ? " ".repeat(space) : k.padEnd(space, " "));
+            typeof k === "undefined"
+                ? "_".repeat(space)
+                : k === "---"
+                  ? " ".repeat(space)
+                  : (opt.code ? keyToQmkCode(k) : k).padEnd(space, " "),
+        );
     });
+    if (opt.code) {
+        template = template.replace(/\b /g, ',').replace(/\b$/gm, ',');
+        template = `[${name}] = LAYOUT_MACRO(
+${template}
+        )`
+    }
     return template;
 }
 
+
 const layerDefinitions = readLayerDefinitions(layers);
 
-console.log(formatLayerDefinition("BaseLayer", layerDefinitions.base));
+console.log(formatLayerDefinitionPretty("BaseLayer", layerDefinitions.base));
+console.log(formatLayerDefinitionPretty("BaseLayer", layerDefinitions.base, {
+    code: true,
+}));
 console.log(layerDefinitions.base);
 
 function createLayers(layerDef, template) {
@@ -213,21 +219,6 @@ const combos = {
     "k00-k01": "KC_ESC",
 };
 
-function templateReplaceKeys(template, newKeys = {}, defaultKey = "KC_TRNS") {
-    const lines = template.trim().split("\n");
-    const keys = lines.map((line) => line.trim().split(/\b/));
-    const replacedKeys = keys.map((row) =>
-        row.map((key) => {
-            const trimmedKey = key.trim();
-            if (trimmedKey === "") {
-                return key;
-            }
-            return newKeys[trimmedKey] || defaultKey;
-        }),
-    );
-    return replacedKeys.map((row) => row.join("")).join("\n");
-}
-
 // console.log(templateReplaceKeys(keymapTemplate))
 
 // console.log(keymapTemplate);
@@ -296,7 +287,7 @@ const othersToQmkCode = {
 };
 
 // Map key names to QMK keycodes
-function keyToQmkCode(key, unknownKey = "KC_TRNS") {
+function keyToQmkCode(key, unknownKey = "_______") {
     if (key === "SPACE") {
         key = " ";
     }
