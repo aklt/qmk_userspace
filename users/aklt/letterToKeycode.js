@@ -58,6 +58,15 @@ export const letterToKeycode = {
   '.': 'KC_DOT',
   '/': 'KC_SLASH',
   CAPS: 'KC_CAPS_LOCK',
+  LSFT: 'KC_LEFT_SHIFT',
+  LCTL: 'KC_LEFT_CONTROL',
+  LALT: 'KC_LEFT_ALT',
+  LGUI: 'KC_LEFT_GUI',
+  RSFT: 'KC_RIGHT_SHIFT',
+  RCTL: 'KC_RIGHT_CONTROL',
+  RALT: 'KC_RIGHT_ALT',
+  RGUI: 'KC_RIGHT_GUI',
+  BSP: 'KC_BACKSPACE',
 
   // Function keys
   F1: 'KC_F1',

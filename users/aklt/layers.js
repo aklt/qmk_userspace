@@ -42,7 +42,7 @@ const layers = {
    f32  k
    f33  l
    f34  ;
-   e35  SENT
+   e35  ENT
 
    e36  LCTL
    f37  z
@@ -65,7 +65,7 @@ const layers = {
    e53  L3_D
    e54  L2_ESC
    f55  LALT
-   f56  L1_LEAD
+   f56  L1
    k57  WIR
    k58  OPR
    f57  L4_S

@@ -22,6 +22,56 @@ e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
 --- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---
 `;
 
+const keyDefines = {
+    CAPS: "KC_CAPS_LOCK",
+    L1: "MO(1)",
+};
+
+const define = {
+    combos: {
+        // Left
+        qw: "ESC",
+        as: "LSFT",
+        zx: "DEL",
+        we: "TAB",
+        sd: "|",
+        xc: "LCTL",
+        er: "LALT",
+        rt: "SPC",
+        fg: "SPC",
+        vb: "SPC",
+        // Right
+        yu: "+",
+        hj: "-",
+        nm: "*",
+        ui: "[",
+        jk: "(",
+        "m,": "{",
+        io: "]",
+        kl: ")",
+        ",.": "}",
+        op: "BSP",
+        "l;": "ENT",
+        "./": "RSFT",
+        // vertical
+        ik: "PGUP",
+        "k,": "PGDN",
+        jm: "HOME",
+        "l.": "END",
+        uj: "INS",
+        ol: "DEL",
+    },
+};
+
+const keyDefinesUsed = {};
+
+function formatDefinesCode(defines) {
+    return Object.entries(defines)
+        .filter(([key]) => keyDefinesUsed[key])
+        .map(([key, value]) => `#define D_${key} ${value}`)
+        .join("\n");
+}
+
 function createSofleTemplate() {
     return keymapTemplate.replace(/k\d{2}\s+/g, "");
 }
@@ -78,61 +128,106 @@ function templateForKb(kb) {
     } else if (kb === "ferris") {
         matchKey = "f";
     } else {
-        throw new Error(`Unknown keyboard: ${kb}, need to be one of sofle, kyria, ferris`);
+        throw new Error(
+            `Unknown keyboard: ${kb}, need to be one of sofle, kyria, ferris`,
+        );
     }
     const re = new RegExp(`^${matchKey}`);
     const lines = [];
     keymapTemplate.split(/\n/g).forEach((line) => {
         const newLine = [];
-        line.trim().split(/\s+/).filter((k) => k.trim() !== "").forEach((k) => {
-            if (re.test(k)) {
-                newLine.push(k);
-            } else {
-                newLine.push("---");
-            }
-        });
+        line.trim()
+            .split(/\s+/)
+            .filter((k) => k.trim() !== "")
+            .forEach((k) => {
+                if (re.test(k)) {
+                    newLine.push(k);
+                } else {
+                    newLine.push("        ");
+                }
+            });
         lines.push(newLine.join(" "));
     });
     return lines.join("\n");
 }
 
-console.log(templateForKb("ferris"));
-console.log(templateForKb("kyria"));
-console.log(templateForKb("sofle"));
+console.log(`
+/* Keyboards templates for ferris, kyria and sofle:
+${templateForKb("ferris")}
+${templateForKb("kyria")}
+${templateForKb("sofle")}
+*/
+`);
 
-function formatLayerDefinitionPretty(layerDef, opt = {space: 8, code: false}) {
+function formatLayerDefinitionPretty(
+    layerDef,
+    kbTemplate,
+    opt = { space: 8, code: false },
+) {
     const space = opt.space || 8;
-    let template = keymapTemplate.split("\n").filter((line) => line.trim() !== "").join("\n");
-    const keys = keymapTemplate.split(/\s+/).filter((k) => k.trim() !== "");
+    let template = kbTemplate
+        .split("\n")
+        .filter((line) => line.trim() !== "")
+        .join("\n");
+    const keys = kbTemplate.split(/\s+/).filter((k) => k.trim() !== "");
     keys.forEach((key) => {
-        const k = layerDef[key] ? layerDef[key][0] : "---";
+        if (!layerDef[key]) {
+            template = template.replace(key, "_".repeat(space));
+            return;
+        }
+        const k = layerDef[key] ? layerDef[key][0] : undefined;
         template = template.replace(
             key,
             typeof k === "undefined"
-                ? "_".repeat(space)
+                ? " ".repeat(space)
                 : k === "---"
                   ? " ".repeat(space)
-                  : (opt.code ? keyToQmkCode(k) : k).padEnd(space, " "),
+                  : (opt.code ? keyToQmkCodeOrDefine(k) : k).padEnd(space, " "),
         );
     });
     if (opt.code) {
-        template = template.replace(/\b /g, ',').replace(/\b$/gm, ',');
+        template = template.replace(/\b /g, ",").replace(/\b$/gm, ",");
     }
-    return prefixWithString(template, '   ');
+    return prefixWithString(template, "   ");
 }
 
-function formatLayerDefinitionCode(name, layerDef, forKb = "k") {
-    const code = formatLayerDefinitionPretty(layerDef, {code: true});
-    const comment = formatLayerDefinitionPretty(layerDef);
+function formatLayerDefinitionCode(name, layerDef, forKb = "sofle") {
+    const kbTemplate = templateForKb(forKb);
+    const code = formatLayerDefinitionPretty(layerDef, kbTemplate, {
+        code: true,
+    });
+    const comment = formatLayerDefinitionPretty(layerDef, kbTemplate);
     return `[${name}] = LAYOUT_MACRO(
-${comment.replace(/^../, '/*').replace(/..$/, '*/')}\n\n${code}
+${comment.replace(/^../, "/*").replace(/..$/, "*/")}\n\n${code}
 )`;
 }
 
+function formatDefinitionCodeForLayers(forKb = "sofle") {
+    return `
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+${Object.entries(layerDefinitions)
+        .map(([name, layerDef]) =>
+            prefixWithString(formatLayerDefinitionCode(`LAYER_${name.toUpperCase()}`, layerDef, forKb), "    "),
+        )
+        .join(",\n\n")}
+};`;
+}
+
+
 const layerDefinitions = readLayerDefinitions(layers);
 
-console.log(formatLayerDefinitionCode("BaseLayer", layerDefinitions.base))
-console.log(layerDefinitions.base);
+// const layerCode = formatDefinitionCodeForLayers("sofle");
+// const layerCode = formatDefinitionCodeForLayers("ferris");
+const layerCode = formatDefinitionCodeForLayers("kyria");
+const definesCode = formatDefinesCode(keyDefines);
+const combosCode = defineCombos(define.combos);
+
+
+// ${definesCode}
+// ${combosCode}
+console.log(`// Built ${new Date()}
+${layerCode}
+`);
 
 function createLayers(layerDef, template) {
     const layerMap = {};
@@ -144,64 +239,6 @@ const kyriaTemplate = createKyriaTemplate();
 const kyriaTransTemplate = createTransTemplate(kyriaTemplate);
 const ferrisTemplate = createFerrisTemplate();
 const ferrisTransTemplate = createTransTemplate(ferrisTemplate);
-
-const define = {
-    layers: {
-        qwerty: {
-            left: `
-q w e r t
-a s d f g
-z x c v b
-`,
-            right: `
-y u i o p
-h j k l ;
-n m , . /
-`,
-        },
-        fKeys: {
-            row: `F1 F2 F3 F4 F5 F6 F7 F8 F9 F10`,
-            combos: {
-                F11: ["F4", "F5"],
-                F12: ["F6", "F7"],
-            },
-        },
-        numbers: "1 2 3 4 5 6 7 8 9 0",
-    },
-    combos: {
-        // Left
-        qw: "KC_ESC",
-        as: "KC_SHIFT",
-        zx: "KC_DEL",
-        we: "KC_TAB",
-        sd: "|",
-        xc: "KC_LCTL",
-        er: "KC_LALT",
-        rt: "KC_SPC",
-        fg: "KC_SPC",
-        vb: "KC_SPC",
-        // Right
-        yu: "+",
-        hj: "-",
-        nm: "*",
-        ui: "[",
-        jk: "(",
-        "m,": "{",
-        io: "]",
-        kl: ")",
-        ",.": "}",
-        op: "KC_BSPC",
-        "l;": "KC_ENT",
-        "./": "KC_RSFT",
-        // vertical
-        ik: "pgup",
-        "k,": "pgdn",
-        jm: "home",
-        "l.": "end",
-        uj: "ins",
-        ol: "del",
-    },
-};
 
 function defineCombos(comboDefinitions) {
     const enumDef = [];
@@ -229,7 +266,6 @@ combo_t key_combos[] = {
 `;
 }
 
-console.log(defineCombos(define.combos));
 
 const colemakDHKeymap = `
 q w f p g           j l u y ;
@@ -327,7 +363,7 @@ const othersToQmkCode = {
 };
 
 // Map key names to QMK keycodes
-function keyToQmkCode(key, unknownKey = "_______") {
+function keyToQmkCodeOrDefine(key, unknownKey = "_______") {
     if (key === "SPACE") {
         key = " ";
     }
@@ -382,9 +418,26 @@ function keyToQmkCode(key, unknownKey = "_______") {
         "-": "KC_MINS",
         "=": "KC_EQL",
         "`": "KC_GRV",
+        BSLS: "KC_BSLS",
+        BSP: "KC_BSPC",
+        C_QUOT: "KC_QUOT",
+        ENCL: "KC_LCTL",
+        ENCR: "KC_RCTL",
+        GRV: "KC_GRV",
+        LSFT: "KC_LSFT",
+        LCTL: "KC_LCTL",
+        LALT: "KC_LALT",
+        LGUI: "KC_LGUI",
+        RGUI: "KC_RGUI",
+        SENT: "KC_ENT",
+        TAB: "KC_TAB",
         // Space
         " ": "KC_SPC",
     };
+    if (keyDefines[key]) {
+        keyDefinesUsed[key] = true;
+        return `D_${key}`;
+    }
 
     return keyMap[key] || unknownKey;
 }
