@@ -300,7 +300,7 @@ function keyToZmkCode(key, unknownKey = "&trans") {
         key = " ";
     }
     const zmkMap = {
-        // Letters
+        // Letters (lowercase)
         a: "&kp A", b: "&kp B", c: "&kp C", d: "&kp D", e: "&kp E",
         f: "&kp F", g: "&kp G", h: "&kp H", i: "&kp I", j: "&kp J",
         k: "&kp K", l: "&kp L", m: "&kp M", n: "&kp N", o: "&kp O",
@@ -310,16 +310,52 @@ function keyToZmkCode(key, unknownKey = "&trans") {
         // Numbers
         0: "&kp N0", 1: "&kp N1", 2: "&kp N2", 3: "&kp N3", 4: "&kp N4",
         5: "&kp N5", 6: "&kp N6", 7: "&kp N7", 8: "&kp N8", 9: "&kp N9",
-        // Special characters
+        // Special characters (unshifted)
         ";": "&kp SEMI", ",": "&kp COMMA", ".": "&kp DOT", "/": "&kp FSLH",
         "'": "&kp SQT", "[": "&kp LBKT", "]": "&kp RBKT", "\\": "&kp BSLH",
         "-": "&kp MINUS", "=": "&kp EQUAL", "`": "&kp GRAVE",
-        // Named keys
-        BSLS: "&kp BSLH", BSP: "&kp BSPC", C_QUOT: "&kp SQT",
-        ENCL: "&kp LCTRL", ENCR: "&kp RCTRL", GRV: "&kp GRAVE",
-        LSFT: "&kp LSHFT", LCTL: "&kp LCTRL", LALT: "&kp LALT",
-        LGUI: "&kp LGUI", RGUI: "&kp RGUI", SENT: "&kp RET", TAB: "&kp TAB",
+        // Shifted symbols
+        "!": "&kp EXCL", "@": "&kp AT", "#": "&kp HASH", "$": "&kp DLLR",
+        "%": "&kp PRCNT", "^": "&kp CARET", "&": "&kp AMPS", "*": "&kp ASTRK",
+        "(": "&kp LPAR", ")": "&kp RPAR", "_": "&kp UNDER", "+": "&kp PLUS",
+        "{": "&kp LBRC", "}": "&kp RBRC", "|": "&kp PIPE", ":": "&kp COLON",
+        '"': "&kp DQT", "<": "&kp LT", ">": "&kp GT", "?": "&kp QMARK",
+        "~": "&kp TILDE",
+        // Named keys - Basic
+        TAB: "&kp TAB", ENT: "&kp RET", ESC: "&kp ESC", SPC: "&kp SPACE",
+        BSP: "&kp BSPC", DEL: "&kp DEL", INS: "&kp INS",
+        BSPC: "&kp BSPC", BSLS: "&kp BSLH", GRV: "&kp GRAVE",
+        // Named keys - Modifiers
+        LSFT: "&kp LSHFT", RSFT: "&kp RSHFT",
+        LCTL: "&kp LCTRL", RCTL: "&kp RCTRL",
+        LALT: "&kp LALT", RALT: "&kp RALT",
+        LGUI: "&kp LGUI", RGUI: "&kp RGUI",
+        // Named keys - Navigation
+        HOME: "&kp HOME", END: "&kp END",
+        PGUP: "&kp PG_UP", PGDN: "&kp PG_DN", PGDOWN: "&kp PG_DN",
+        UP: "&kp UP", DOWN: "&kp DOWN", LEFT: "&kp LEFT", RIGHT: "&kp RIGHT",
+        // Named keys - Function/Special
+        CAPS: "&kp CAPS", NUM: "&kp KP_NUM", APP: "&kp K_APP",
+        PSCR: "&kp PSCRN", SLCK: "&kp SLCK", PAUS: "&kp PAUSE_BREAK",
+        // Named keys - Encoders (mapped to ctrl for rotation fallback)
+        ENCL: "&kp LCTRL", ENCR: "&kp RCTRL",
+        // Named keys - Aliases
+        C_QUOT: "&kp SQT", SENT: "&kp RET",
+        // Space
         " ": "&kp SPACE",
+        // Layer keys (ZMK layer tap and momentary)
+        L1: "&mo 1",
+        L2_ESC: "&lt 2 ESC",
+        L3_D: "&lt 3 D",
+        L4_S: "&lt 4 SPACE",
+        L5_F: "&lt 5 F",
+        GUI_DEL: "&mt LGUI DEL",
+        // Kyria-specific (placeholders)
+        WIR: "&trans",
+        OPR: "&trans",
+        // Ctrl + key combinations
+        C_LEFT: "&kp LC(LEFT)",
+        C_RIGHT: "&kp LC(RIGHT)",
     };
     return zmkMap[key] || unknownKey;
 }
