@@ -107,9 +107,9 @@ const keyDefines = {
 
 const define = {
     combos: {
-        // Left
+        // Left hand - horizontal
         qw: "ESC",
-        as: "LSFT",
+        as: "TAB",       // Conflict resolved: keymap.c (was LSFT in define-keymap.js)
         zx: "DEL",
         we: "TAB",
         sd: "|",
@@ -118,26 +118,35 @@ const define = {
         rt: "SPC",
         fg: "SPC",
         vb: "SPC",
-        // Right
+        // Right hand - horizontal
         yu: "+",
         hj: "-",
         nm: "*",
         ui: "[",
         jk: "(",
         "m,": "{",
-        io: "]",
+        io: "]",         // Conflict resolved: define-keymap.js (was DEL in keymap.c)
         kl: ")",
         ",.": "}",
         op: "BSP",
         "l;": "ENT",
-        "./": "RSFT",
-        // vertical
+        "./": "BSLS",    // Conflict resolved: keymap.c (was RSFT in define-keymap.js)
+        // Vertical combos
         ik: "PGUP",
         "k,": "PGDN",
         jm: "HOME",
         "l.": "END",
         uj: "INS",
         ol: "DEL",
+    },
+    // Additional combos from keymap.c that use non-alpha keys
+    // These require special handling as they use number row or modifier keys
+    specialCombos: {
+        // Format: { keys: [key1, key2], result: "keycode", qmkOnly: true }
+        ZERO_BACKSPACE: { keys: ["KC_0", "KC_BSPC"], result: "KC_PLUS" },
+        CAPS_WORD: { keys: ["KC_LSFT", "KC_BSPC"], result: "CK_CAPS" },
+        MINUS: { keys: ["KC_0", "KC_9"], result: "KC_MINUS" },
+        TOGGLE_LAYER: { keys: ["L1_LEAD", "L4_S"], result: "LT(TOGGLE, KC_NO)" },
     },
 };
 
@@ -572,7 +581,7 @@ function main() {
             if (format === "qmk") {
                 const layerCode = formatDefinitionCodeForLayers(keyboard);
                 const definesCode = formatDefinesCode(keyDefines);
-                const combosCode = defineCombos(define.combos);
+                const combosCode = defineCombos(define.combos, define.specialCombos);
                 console.log(`// Built ${new Date()}
 // Keyboard: ${keyboard}
 // Format: QMK keymap.c
@@ -618,10 +627,12 @@ const kyriaTransTemplate = createTransTemplate(kyriaTemplate);
 const ferrisTemplate = createFerrisTemplate();
 const ferrisTransTemplate = createTransTemplate(ferrisTemplate);
 
-function defineCombos(comboDefinitions) {
+function defineCombos(comboDefinitions, specialComboDefinitions = {}) {
     const enumDef = [];
     const comboDefs = [];
     const combos = [];
+
+    // Process letter-based combos
     Object.entries(comboDefinitions).forEach(([comboKeys, resultKey], i) => {
         const enumName = `COMBO_${i}_${comboKeys.toUpperCase().replace(/\W/g, "_")}`;
         const ksKeys = comboKeys
@@ -634,6 +645,18 @@ function defineCombos(comboDefinitions) {
         comboDefs.push(definition);
         combos.push(comboDef);
     });
+
+    // Process special combos (already have QMK keycodes)
+    Object.entries(specialComboDefinitions).forEach(([name, combo]) => {
+        const enumName = name;
+        const ksKeys = combo.keys.join(", ");
+        const definition = `const uint16_t PROGMEM def${enumName}[] = { ${ksKeys}, COMBO_END };`;
+        const comboDef = `  [${enumName}] = COMBO(def${enumName}, ${combo.result})`;
+        enumDef.push(enumName);
+        comboDefs.push(definition);
+        combos.push(comboDef);
+    });
+
     return `enum combos {
     ${enumDef.join(",\n    ")}
 };
