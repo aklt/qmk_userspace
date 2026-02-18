@@ -1,4 +1,11 @@
-// Generate a QMK keymap using a template and definitions for keys
+#!/usr/bin/env node
+// Generate a QMK or ZMK keymap using a template and definitions for keys
+//
+// Usage:
+//   node define-keymap.js <format> <keyboard>
+//   node define-keymap.js qmk sofle
+//   node define-keymap.js zmk ferris
+//   node define-keymap.js help
 //
 // Keyboards:
 //
@@ -13,6 +20,77 @@
 // fXX: Sofle + Kyria + Sweep
 import { toKeycode } from "./letterToKeycode.js";
 import layers from "./layers.js";
+
+// Command line argument parsing
+const args = process.argv.slice(2);
+
+function printUsage() {
+    console.log(`Usage: node define-keymap.js <format> <keyboard>
+
+Formats:
+  qmk       - Generate QMK keymap.c format
+  zmk       - Generate ZMK configuration format
+
+Keyboards:
+  sofle     - Sofle keyboard
+  kyria     - Kyria keyboard
+  ferris    - Ferris Sweep keyboard
+
+Commands:
+  help      - Show this help message
+  templates - Show keyboard layout templates
+
+Examples:
+  node define-keymap.js qmk sofle
+  node define-keymap.js zmk ferris
+  node define-keymap.js templates
+  node define-keymap.js help
+`);
+}
+
+function parseArgs(args) {
+    const result = { format: null, keyboard: null };
+
+    // Handle first argument - determines action/format
+    const firstArg = args[0] || "";
+
+    // Check for help
+    if (/^(help|-h|--help)$/i.test(firstArg)) {
+        return { action: "help" };
+    }
+
+    // Check for templates command
+    if (/^templates$/i.test(firstArg)) {
+        return { action: "templates" };
+    }
+
+    // Check for format (qmk or zmk)
+    if (/^qmk$/i.test(firstArg)) {
+        result.format = "qmk";
+    } else if (/^zmk$/i.test(firstArg)) {
+        result.format = "zmk";
+    } else if (firstArg) {
+        console.error(`Unknown format: ${firstArg}`);
+        return { action: "help" };
+    }
+
+    // Handle second argument - keyboard selection
+    const secondArg = args[1] || "";
+
+    if (/^sofle$/i.test(secondArg)) {
+        result.keyboard = "sofle";
+    } else if (/^kyria$/i.test(secondArg)) {
+        result.keyboard = "kyria";
+    } else if (/^ferris$/i.test(secondArg)) {
+        result.keyboard = "ferris";
+    } else if (secondArg) {
+        console.error(`Unknown keyboard: ${secondArg}`);
+        return { action: "help" };
+    }
+
+    result.action = "generate";
+    return result;
+}
 
 const keymapTemplate = `
 s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
@@ -151,13 +229,16 @@ function templateForKb(kb) {
     return lines.join("\n");
 }
 
-console.log(`
+// Template visualization (available via 'templates' command if needed)
+function printTemplates() {
+    console.log(`
 /* Keyboards templates for ferris, kyria and sofle:
 ${templateForKb("ferris")}
 ${templateForKb("kyria")}
 ${templateForKb("sofle")}
 */
 `);
+}
 
 function formatLayerDefinitionPretty(
     layerDef,
@@ -213,21 +294,145 @@ ${Object.entries(layerDefinitions)
 };`;
 }
 
+// ZMK keycode mapping
+function keyToZmkCode(key, unknownKey = "&trans") {
+    if (key === "SPACE") {
+        key = " ";
+    }
+    const zmkMap = {
+        // Letters
+        a: "&kp A", b: "&kp B", c: "&kp C", d: "&kp D", e: "&kp E",
+        f: "&kp F", g: "&kp G", h: "&kp H", i: "&kp I", j: "&kp J",
+        k: "&kp K", l: "&kp L", m: "&kp M", n: "&kp N", o: "&kp O",
+        p: "&kp P", q: "&kp Q", r: "&kp R", s: "&kp S", t: "&kp T",
+        u: "&kp U", v: "&kp V", w: "&kp W", x: "&kp X", y: "&kp Y",
+        z: "&kp Z",
+        // Numbers
+        0: "&kp N0", 1: "&kp N1", 2: "&kp N2", 3: "&kp N3", 4: "&kp N4",
+        5: "&kp N5", 6: "&kp N6", 7: "&kp N7", 8: "&kp N8", 9: "&kp N9",
+        // Special characters
+        ";": "&kp SEMI", ",": "&kp COMMA", ".": "&kp DOT", "/": "&kp FSLH",
+        "'": "&kp SQT", "[": "&kp LBKT", "]": "&kp RBKT", "\\": "&kp BSLH",
+        "-": "&kp MINUS", "=": "&kp EQUAL", "`": "&kp GRAVE",
+        // Named keys
+        BSLS: "&kp BSLH", BSP: "&kp BSPC", C_QUOT: "&kp SQT",
+        ENCL: "&kp LCTRL", ENCR: "&kp RCTRL", GRV: "&kp GRAVE",
+        LSFT: "&kp LSHFT", LCTL: "&kp LCTRL", LALT: "&kp LALT",
+        LGUI: "&kp LGUI", RGUI: "&kp RGUI", SENT: "&kp RET", TAB: "&kp TAB",
+        " ": "&kp SPACE",
+    };
+    return zmkMap[key] || unknownKey;
+}
+
+function formatLayerDefinitionZmk(layerDef, kbTemplate) {
+    let template = kbTemplate
+        .split("\n")
+        .filter((line) => line.trim() !== "")
+        .join("\n");
+    const keys = kbTemplate.split(/\s+/).filter((k) => k.trim() !== "");
+    const space = 12;
+    keys.forEach((key) => {
+        if (!layerDef[key]) {
+            template = template.replace(key, "&trans".padEnd(space, " "));
+            return;
+        }
+        const k = layerDef[key] ? layerDef[key][0] : undefined;
+        template = template.replace(
+            key,
+            typeof k === "undefined"
+                ? "&trans".padEnd(space, " ")
+                : k === "---"
+                  ? "&trans".padEnd(space, " ")
+                  : keyToZmkCode(k).padEnd(space, " "),
+        );
+    });
+    return prefixWithString(template, "    ");
+}
+
+function formatZmkLayerCode(name, layerDef, forKb = "ferris") {
+    const kbTemplate = templateForKb(forKb);
+    const code = formatLayerDefinitionZmk(layerDef, kbTemplate);
+    return `${name}_layer {
+    bindings = <
+${code}
+    >;
+};`;
+}
+
+function formatZmkDefinitionCodeForLayers(forKb = "ferris") {
+    return `/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+${Object.entries(layerDefinitions)
+        .map(([name, layerDef]) =>
+            prefixWithString(formatZmkLayerCode(name, layerDef, forKb), "        "),
+        )
+        .join("\n\n")}
+    };
+};`;
+}
+
 
 const layerDefinitions = readLayerDefinitions(layers);
 
-// const layerCode = formatDefinitionCodeForLayers("sofle");
-// const layerCode = formatDefinitionCodeForLayers("ferris");
-const layerCode = formatDefinitionCodeForLayers("kyria");
-const definesCode = formatDefinesCode(keyDefines);
-const combosCode = defineCombos(define.combos);
+// Main CLI logic
+function main() {
+    const parsedArgs = parseArgs(args);
 
+    switch (parsedArgs.action) {
+        case "help":
+            printUsage();
+            process.exit(0);
+            break;
 
-// ${definesCode}
-// ${combosCode}
-console.log(`// Built ${new Date()}
+        case "templates":
+            printTemplates();
+            process.exit(0);
+            break;
+
+        case "generate":
+            if (!parsedArgs.format || !parsedArgs.keyboard) {
+                console.error("Error: Both format and keyboard must be specified.\n");
+                printUsage();
+                process.exit(1);
+            }
+
+            const keyboard = parsedArgs.keyboard;
+            const format = parsedArgs.format;
+
+            if (format === "qmk") {
+                const layerCode = formatDefinitionCodeForLayers(keyboard);
+                const definesCode = formatDefinesCode(keyDefines);
+                const combosCode = defineCombos(define.combos);
+                console.log(`// Built ${new Date()}
+// Keyboard: ${keyboard}
+// Format: QMK keymap.c
+
+${definesCode}
+
 ${layerCode}
+
+${combosCode}
 `);
+            } else if (format === "zmk") {
+                const zmkCode = formatZmkDefinitionCodeForLayers(keyboard);
+                console.log(`// Built ${new Date()}
+// Keyboard: ${keyboard}
+// Format: ZMK configuration
+
+${zmkCode}
+`);
+            }
+            break;
+
+        default:
+            printUsage();
+            process.exit(1);
+    }
+}
+
+main();
 
 function createLayers(layerDef, template) {
     const layerMap = {};
