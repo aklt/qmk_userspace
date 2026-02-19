@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node BSPC
 // Generate a QMK or ZMK keymap using a template and definitions for keys
 //
 // Usage:
@@ -131,6 +131,7 @@ const define = {
         op: "BSP",
         "l;": "ENT",
         "./": "BSLS",    // Conflict resolved: keymap.c (was RSFT in define-keymap.js)
+        "p\\": "BSPC",
         // Vertical combos
         ik: "PGUP",
         "k,": "PGDN",

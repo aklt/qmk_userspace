@@ -458,8 +458,8 @@ const layers = {
    f19  END
    f20  (
    f21  )
-   f22  [
-   e23  ]
+   f22  {
+   e23  }
 
    e24  DEL
    f25  ___
@@ -471,8 +471,8 @@ const layers = {
    f31  DOWN
    f32  UP
    f33  RIGHT
-   f34  {
-   e35  }
+   f34  [
+   e35  ]
 
    e36  ___
    f37  ___

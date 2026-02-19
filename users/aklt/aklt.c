@@ -20,9 +20,9 @@ const uint32_t PROGMEM unicode_map[] = {
 };
 
 // {{{1 Globals
-static char DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
-static os_variant_t DetectedOs = OS_UNSURE;
-static uint8_t theColor = -10;
+static char         DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
+static os_variant_t DetectedOs                             = OS_UNSURE;
+static uint8_t      theColor                               = -10;
 
 // {{{1 QMK Hooks
 // LED state - See https://docs.splitkb.com/product-guides/liatris/power-led
@@ -64,7 +64,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_COLO:
             if (record->event.pressed) {
                 theColor = (theColor + 1) % 100;
-                res = false;
+                res      = false;
             }
             break;
         case CK_FLAS:
