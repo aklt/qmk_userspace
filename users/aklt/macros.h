@@ -26,11 +26,11 @@
 #define CK_NKEY TG(OVERLAY_NUMPAD)
 #define CK_FKEY TG(OVERLAY_FN)
 
-#define L1_LEAD LT(L1_NAV, KC_ENT)
-#define L2_ESC  LT(L2, KC_ESC)
-#define L3_D    LT(L3, KC_DEL)
-#define L4_S    LT(L4, KC_SPC)
-#define L5_F    LT(L5, KC_TAB)
+#define D_L1 LT(L1_NAV, KC_ENT)
+#define D_L2  LT(L2, KC_ESC)
+#define D_L3    LT(L3, KC_DEL)
+#define D_L4    LT(L4, KC_SPC)
+#define D_L5    LT(L5, KC_TAB)
 
 #define GUI_DEL    MT(MOD_LGUI, KC_DEL)
 

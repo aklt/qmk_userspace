@@ -21,6 +21,14 @@
 import { toKeycode } from "./letterToKeycode.js";
 import layers from "./layers.js";
 
+const keymapTemplate = `
+s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
+e12 f13 f14 f15 f16 f17 --- --- --- --- f18 f19 f20 f21 f22 e23
+e24 f25 f26 f27 f28 f29 --- --- --- --- f30 f31 f32 f33 f34 e35
+e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
+--- --- s52 e53 e54 f55 f56 k57 k58 f59 f60 e61 e62 s63 --- ---
+`;
+
 // Command line argument parsing
 const args = process.argv.slice(2);
 
@@ -92,14 +100,6 @@ function parseArgs(args) {
     return result;
 }
 
-const keymapTemplate = `
-s00 s01 s02 s03 s04 s05 --- --- --- --- s06 s07 s08 s09 s10 s11
-e12 f13 f14 f15 f16 f17 --- --- --- --- f18 f19 f20 f21 f22 e23
-e24 f25 f26 f27 f28 f29 --- --- --- --- f30 f31 f32 f33 f34 e35
-e36 f37 f38 f39 f40 f41 e42 k43 k44 e45 f46 f47 f48 f49 f50 e51
---- --- s52 e53 e54 f55 f56 k57 k58 f57 f58 e59 e60 s61 --- ---
-`;
-
 const keyDefines = {
     CAPS: "KC_CAPS_LOCK",
     L1: "MO(1)",
@@ -146,7 +146,7 @@ const define = {
         ZERO_BACKSPACE: { keys: ["KC_0", "KC_BSPC"], result: "KC_PLUS" },
         CAPS_WORD: { keys: ["KC_LSFT", "KC_BSPC"], result: "CK_CAPS" },
         MINUS: { keys: ["KC_0", "KC_9"], result: "KC_MINUS" },
-        TOGGLE_LAYER: { keys: ["L1_LEAD", "L4_S"], result: "LT(TOGGLE, KC_NO)" },
+        TOGGLE_LAYER: { keys: ["D_L1", "D_L4"], result: "LT(TOGGLE, KC_NO)" },
     },
 };
 
@@ -249,6 +249,8 @@ ${templateForKb("sofle")}
 `);
 }
 
+const TRNS = "_______";
+
 function formatLayerDefinitionPretty(
     layerDef,
     kbTemplate,
@@ -262,7 +264,7 @@ function formatLayerDefinitionPretty(
     const keys = kbTemplate.split(/\s+/).filter((k) => k.trim() !== "");
     keys.forEach((key) => {
         if (!layerDef[key]) {
-            template = template.replace(key, "_".repeat(space));
+            template = template.replace(key, TRNS.padEnd(space, " "));
             return;
         }
         const k = layerDef[key] ? layerDef[key][0] : undefined;
@@ -272,7 +274,7 @@ function formatLayerDefinitionPretty(
                 ? " ".repeat(space)
                 : k === "---"
                   ? " ".repeat(space)
-                  : (opt.code ? keyToQmkCodeOrDefine(k) : k).padEnd(space, " "),
+                  : (opt.code ? toKeycode(k) : k).padEnd(space, " "),
         );
     });
     if (opt.code) {
@@ -292,15 +294,48 @@ ${comment.replace(/^../, "/*").replace(/..$/, "*/")}\n\n${code}
 )`;
 }
 
+// Map layer names from layers.js to macros.h enum names
+const layerNameMap = {
+    base_sofle: "BASE_SOFLE",
+    base_qwerty: "BASE_QWERTY",
+    base_colemak_dh: "BASE_COLEMAK_DH",
+    base_gaming: "BASE_GAMING",
+    overlay_numpad: "OVERLAY_NUMPAD",
+    overlay_num: "OVERLAY_NUM",
+    overlay_fn: "OVERLAY_FN",
+    overlay_mouse: "OVERLAY_MOUSE",
+    toggle: "TOGGLE",
+    l1_nav: "L1_NAV",
+    l2: "L2",
+    l3: "L3",
+    l4: "L4",
+    l5: "L5",
+};
+
 function formatDefinitionCodeForLayers(forKb = "sofle") {
     return `
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ${Object.entries(layerDefinitions)
-        .map(([name, layerDef]) =>
-            prefixWithString(formatLayerDefinitionCode(`LAYER_${name.toUpperCase()}`, layerDef, forKb), "    "),
-        )
+        .map(([name, layerDef]) => {
+            const qmkLayerName = layerNameMap[name] || `LAYER_${name.toUpperCase()}`;
+            return prefixWithString(formatLayerDefinitionCode(qmkLayerName, layerDef, forKb), "    ");
+        })
         .join(",\n\n")}
 };`;
+}
+
+// Generate encoder map for all layers
+function formatEncoderMap() {
+    const layerNames = Object.keys(layerDefinitions).map(name => layerNameMap[name] || `LAYER_${name.toUpperCase()}`);
+    const encoderLines = layerNames.map(name =>
+        `    [${name}] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)}`
+    ).join(",\n");
+    return `
+#if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+${encoderLines}
+};
+#endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)`;
 }
 
 // ZMK keycode mapping
@@ -354,10 +389,10 @@ function keyToZmkCode(key, unknownKey = "&trans") {
         " ": "&kp SPACE",
         // Layer keys (ZMK layer tap and momentary)
         L1: "&mo 1",
-        L2_ESC: "&lt 2 ESC",
-        L3_D: "&lt 3 D",
-        L4_S: "&lt 4 SPACE",
-        L5_F: "&lt 5 F",
+        D_L2: "&lt 2 ESC",
+        D_L3: "&lt 3 D",
+        D_L4: "&lt 4 SPACE",
+        D_L5: "&lt 5 F",
         GUI_DEL: "&mt LGUI DEL",
         // Kyria-specific (placeholders)
         WIR: "&trans",
@@ -580,17 +615,25 @@ function main() {
 
             if (format === "qmk") {
                 const layerCode = formatDefinitionCodeForLayers(keyboard);
-                const definesCode = formatDefinesCode(keyDefines);
+                const encoderCode = formatEncoderMap();
                 const combosCode = defineCombos(define.combos, define.specialCombos);
-                console.log(`// Built ${new Date()}
+                console.log(`// Generated keymap.c
+// Built: ${new Date().toISOString()}
 // Keyboard: ${keyboard}
-// Format: QMK keymap.c
+// Generator: define-keymap.js
 
-${definesCode}
+#include "aklt.h"
 
+// {{{1 Keymap Layers
 ${layerCode}
 
+// {{{1 Encoder Map
+${encoderCode}
+
+// {{{1 Combos
+#ifdef COMBO_ENABLE
 ${combosCode}
+#endif // COMBO_ENABLE
 `);
             } else if (format === "zmk") {
                 const zmkCode = formatZmkDefinitionCodeForLayers(keyboard);
@@ -763,73 +806,3 @@ combo_t key_combos[] = {
 //     "+": "KC_PPLS",
 // };
 
-// Map key names to QMK keycodes
-function keyToQmkCodeOrDefine(key, unknownKey = "_______") {
-    if (key === "SPACE") {
-        key = " ";
-    }
-    const keyMap = {
-        // Letters (lowercase)
-        a: "KC_A", b: "KC_B", c: "KC_C", d: "KC_D", e: "KC_E",
-        f: "KC_F", g: "KC_G", h: "KC_H", i: "KC_I", j: "KC_J",
-        k: "KC_K", l: "KC_L", m: "KC_M", n: "KC_N", o: "KC_O",
-        p: "KC_P", q: "KC_Q", r: "KC_R", s: "KC_S", t: "KC_T",
-        u: "KC_U", v: "KC_V", w: "KC_W", x: "KC_X", y: "KC_Y",
-        z: "KC_Z",
-        // Numbers
-        0: "KC_0", 1: "KC_1", 2: "KC_2", 3: "KC_3", 4: "KC_4",
-        5: "KC_5", 6: "KC_6", 7: "KC_7", 8: "KC_8", 9: "KC_9",
-        // Special characters (unshifted)
-        ";": "KC_SCLN", ",": "KC_COMM", ".": "KC_DOT", "/": "KC_SLSH",
-        "'": "KC_QUOT", "[": "KC_LBRC", "]": "KC_RBRC", "\\": "KC_BSLS",
-        "-": "KC_MINS", "=": "KC_EQL", "`": "KC_GRV",
-        // Shifted symbols
-        "!": "S(KC_1)", "@": "S(KC_2)", "#": "S(KC_3)", "$": "S(KC_4)",
-        "%": "S(KC_5)", "^": "S(KC_6)", "&": "S(KC_7)", "*": "S(KC_8)",
-        "(": "S(KC_9)", ")": "S(KC_0)", "_": "S(KC_MINS)", "+": "S(KC_EQL)",
-        "{": "S(KC_LBRC)", "}": "S(KC_RBRC)", "|": "S(KC_BSLS)", ":": "S(KC_SCLN)",
-        '"': "S(KC_QUOT)", "<": "S(KC_COMM)", ">": "S(KC_DOT)", "?": "S(KC_SLSH)",
-        "~": "S(KC_GRV)",
-        // Named keys - Basic
-        TAB: "KC_TAB", ENT: "KC_ENT", ESC: "KC_ESC", SPC: "KC_SPC",
-        BSP: "KC_BSPC", BSPC: "KC_BSPC", DEL: "KC_DEL", INS: "KC_INS",
-        BSLS: "KC_BSLS", GRV: "KC_GRV",
-        // Named keys - Modifiers
-        LSFT: "KC_LSFT", RSFT: "KC_RSFT",
-        LCTL: "KC_LCTL", RCTL: "KC_RCTL",
-        LALT: "KC_LALT", RALT: "KC_RALT",
-        LGUI: "KC_LGUI", RGUI: "KC_RGUI",
-        // Named keys - Navigation
-        HOME: "KC_HOME", END: "KC_END",
-        PGUP: "KC_PGUP", PGDN: "KC_PGDN", PGDOWN: "KC_PGDN",
-        UP: "KC_UP", DOWN: "KC_DOWN", LEFT: "KC_LEFT", RIGHT: "KC_RIGHT",
-        // Named keys - Function/Special
-        CAPS: "KC_CAPS", NUM: "KC_NUM", APP: "KC_APP",
-        PSCR: "KC_PSCR", SLCK: "KC_SCRL", PAUS: "KC_PAUS",
-        // Named keys - Encoders (mapped to ctrl for rotation fallback)
-        ENCL: "KC_LCTL", ENCR: "KC_RCTL",
-        // Named keys - Aliases
-        C_QUOT: "KC_QUOT", SENT: "KC_ENT",
-        // Space
-        " ": "KC_SPC",
-        // Layer keys (QMK layer tap and momentary)
-        L1: "MO(1)",
-        L2_ESC: "LT(2, KC_ESC)",
-        L3_D: "LT(3, KC_D)",
-        L4_S: "LT(4, KC_SPC)",
-        L5_F: "LT(5, KC_F)",
-        GUI_DEL: "LGUI_T(KC_DEL)",
-        // Kyria-specific (placeholders)
-        WIR: "KC_TRNS",
-        OPR: "KC_TRNS",
-        // Ctrl + key combinations
-        C_LEFT: "C(KC_LEFT)",
-        C_RIGHT: "C(KC_RIGHT)",
-    };
-    if (keyDefines[key]) {
-        keyDefinesUsed[key] = true;
-        return `D_${key}`;
-    }
-
-    return keyMap[key] || unknownKey;
-}

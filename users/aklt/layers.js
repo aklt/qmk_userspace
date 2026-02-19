@@ -13,7 +13,7 @@
 // Row 1:  e12 f13 f14 f15 f16 f17          f18 f19 f20 f21 f22 e23
 // Row 2:  e24 f25 f26 f27 f28 f29          f30 f31 f32 f33 f34 e35
 // Row 3:  e36 f37 f38 f39 f40 f41 EL  ER   f42 f43 f44 f45 f46 e47
-// Row 4:      t48 t49 t50 t51 t52          t53 t54 t55 t56 t57
+// Row 4:      s52 e53 e54 f55 f56          k57 k58 f57 t56 t57
 
 const layers = {
     // Layer 0: BASE_SOFLE - Base layer with all modifiers and layer taps
@@ -32,124 +32,101 @@ const layers = {
    s11  BSPC
 
    e12  TAB
-   f13  Q
-   f14  W
-   f15  E
-   f16  R
-   f17  T
-   f18  Y
-   f19  U
-   f20  I
-   f21  O
-   f22  P
+   f13  q
+   f14  w
+   f15  e
+   f16  r
+   f17  t
+   f18  y
+   f19  u
+   f20  i
+   f21  o
+   f22  p
    e23  BSLS
 
    e24  LSFT
-   f25  A
-   f26  S
-   f27  D
-   f28  F
-   f29  G
-   f30  H
-   f31  J
-   f32  K
-   f33  L
+   f25  a
+   f26  s
+   f27  d
+   f28  f
+   f29  g
+   f30  h
+   f31  j
+   f32  k
+   f33  l
    f34  ;
    e35  SC_SENT
 
    e36  LCTL
-   f37  Z
-   f38  X
-   f39  C
-   f40  V
-   f41  B
-   EL   MUTE
-   ER   TAB
-   f42  N
-   f43  M
-   f44  ,
-   f45  .
-   f46  /
-   e47  RCTL_QUOT
+   f37  z
+   f38  x
+   f39  c
+   f40  v
+   f41  b
+   e42  MUTE
+   e45  TAB
+   f46  n
+   f47  m
+   f48  ,
+   f49  .
+   f50  /
+   e51  RCTL_QUOT
 
-   t48  LGUI
-   t49  L3_DEL
-   t50  L2_ESC
-   t51  LALT
-   t52  L1_ENT
-   t53  L4_SPC
-   t54  GUI_DEL
-   t55  L5_TAB
-   t56  APP
-   t57  RGUI
+   s52  LGUI
+   e53  L3
+   e54  L2
+   f55  LALT
+   f56  L1
+   f59  L4
+   f60  GUI_DEL
+   e61  L5
+   e62  APP
+   s63  RGUI
 `,
 
     // Layer 1: BASE_QWERTY - Transparent QWERTY overlay
     base_qwerty: `
-   s00  ___
-   s01  ___
-   s02  ___
-   s03  ___
-   s04  ___
-   s05  ___
-   s06  ___
-   s07  ___
-   s08  ___
-   s09  ___
-   s10  ___
-   s11  ___
 
    e12  ___
-   f13  Q
-   f14  W
-   f15  E
-   f16  R
-   f17  T
-   f18  Y
-   f19  U
-   f20  I
-   f21  O
-   f22  P
+   f13  q
+   f14  w
+   f15  e
+   f16  r
+   f17  t
+   f18  y
+   f19  u
+   f20  i
+   f21  o
+   f22  p
    e23  ___
 
    e24  ___
-   f25  A
-   f26  S
-   f27  D
-   f28  F
-   f29  G
-   f30  H
-   f31  J
-   f32  K
-   f33  L
+   f25  a
+   f26  s
+   f27  d
+   f28  f
+   f29  g
+   f30  h
+   f31  j
+   f32  k
+   f33  l
    f34  ;
    e35  ___
 
    e36  ___
-   f37  Z
-   f38  X
-   f39  C
-   f40  V
-   f41  B
+   f37  z
+   f38  x
+   f39  c
+   f40  v
+   f41  b
    EL   ___
    ER   ___
-   f42  N
-   f43  M
+   f42  n
+   f43  m
    f44  ,
    f45  .
    f46  /
    e47  ___
-
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `,
 
     // Layer 2: BASE_COLEMAK_DH - Colemak-DH layout overlay
@@ -168,56 +145,45 @@ const layers = {
    s11  ___
 
    e12  ___
-   f13  Q
-   f14  W
-   f15  F
-   f16  P
-   f17  B
-   f18  J
-   f19  L
-   f20  U
-   f21  Y
+   f13  q
+   f14  w
+   f15  f
+   f16  p
+   f17  b
+   f18  j
+   f19  l
+   f20  u
+   f21  y
    f22  ;
    e23  ___
 
    e24  ___
-   f25  A
-   f26  R
-   f27  S
-   f28  T
-   f29  G
-   f30  M
-   f31  N
-   f32  E
-   f33  I
-   f34  O
+   f25  a
+   f26  r
+   f27  s
+   f28  t
+   f29  g
+   f30  m
+   f31  n
+   f32  e
+   f33  i
+   f34  o
    e35  ___
 
    e36  ___
-   f37  Z
-   f38  X
-   f39  C
-   f40  D
-   f41  V
+   f37  z
+   f38  x
+   f39  c
+   f40  d
+   f41  v
    EL   ___
    ER   ___
-   f42  K
-   f43  H
+   f42  k
+   f43  h
    f44  ,
    f45  .
    f46  /
    e47  ___
-
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `,
 
     // Layer 3: BASE_GAMING - Gaming layer (left hand optimized)
@@ -236,11 +202,11 @@ const layers = {
    s11  XXX
 
    e12  TAB
-   f13  Q
-   f14  C
-   f15  W
-   f16  F
-   f17  T
+   f13  q
+   f14  c
+   f15  w
+   f16  f
+   f17  t
    f18  XXX
    f19  XXX
    f20  XXX
@@ -249,11 +215,11 @@ const layers = {
    e23  XXX
 
    e24  LSFT
-   f25  R
-   f26  A
-   f27  S
-   f28  D
-   f29  G
+   f25  r
+   f26  a
+   f27  s
+   f28  d
+   f29  g
    f30  XXX
    f31  XXX
    f32  XXX
@@ -262,11 +228,11 @@ const layers = {
    e35  XXX
 
    e36  LCTL
-   f37  Y
-   f38  Z
-   f39  X
-   f40  V
-   f41  B
+   f37  y
+   f38  z
+   f39  x
+   f40  v
+   f41  b
    EL   ___
    ER   ___
    f42  XXX
@@ -276,16 +242,8 @@ const layers = {
    f46  XXX
    e47  XXX
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  TAB
-   t52  SPC
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
+   f55  TAB
+   f56  SPC
 `,
 
     // Layer 4: OVERLAY_NUMPAD - Numpad overlay
@@ -344,14 +302,9 @@ const layers = {
    f46  PENT
    e47  P,
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  XXX
-   t54  P0
-   t55  P.
+   k57  XXX
+   k58  P0
+   f57  P.
    t56  PENT
    t57  ___
 `,
@@ -371,57 +324,6 @@ const layers = {
    s10  0
    s11  ___
 
-   e12  ___
-   f13  ___
-   f14  ___
-   f15  ___
-   f16  ___
-   f17  ___
-   f18  ___
-   f19  ___
-   f20  ___
-   f21  ___
-   f22  ___
-   e23  ___
-
-   e24  ___
-   f25  ___
-   f26  ___
-   f27  ___
-   f28  ___
-   f29  ___
-   f30  ___
-   f31  ___
-   f32  ___
-   f33  ___
-   f34  ___
-   e35  ___
-
-   e36  ___
-   f37  ___
-   f38  ___
-   f39  ___
-   f40  ___
-   f41  ___
-   EL   ___
-   ER   ___
-   f42  ___
-   f43  ___
-   f44  ___
-   f45  ___
-   f46  ___
-   e47  ___
-
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `,
 
     // Layer 6: OVERLAY_FN - Function keys overlay
@@ -439,125 +341,28 @@ const layers = {
    s10  F10
    s11  ___
 
-   e12  ___
-   f13  ___
-   f14  ___
-   f15  ___
-   f16  ___
    f17  F11
    f18  F12
-   f19  ___
-   f20  ___
-   f21  ___
-   f22  ___
-   e23  ___
-
-   e24  ___
-   f25  ___
-   f26  ___
-   f27  ___
-   f28  ___
-   f29  ___
-   f30  ___
-   f31  ___
-   f32  ___
-   f33  ___
-   f34  ___
-   e35  ___
-
-   e36  ___
-   f37  ___
-   f38  ___
-   f39  ___
-   f40  ___
-   f41  ___
-   EL   ___
-   ER   ___
-   f42  ___
-   f43  ___
-   f44  ___
-   f45  ___
-   f46  ___
-   e47  ___
-
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `,
 
     // Layer 7: OVERLAY_MOUSE - Mouse keys overlay
     overlay_mouse: `
-   s00  ___
-   s01  ___
-   s02  ___
-   s03  ___
-   s04  ___
-   s05  ___
-   s06  ___
-   s07  ___
-   s08  ___
-   s09  ___
-   s10  ___
-   s11  ___
-
-   e12  ___
-   f13  ___
-   f14  ___
-   f15  ___
-   f16  ___
-   f17  ___
    f18  BTN1
    f19  WHLD
    f20  WHLU
    f21  BTN2
-   f22  ___
-   e23  ___
 
-   e24  ___
-   f25  ___
-   f26  ___
-   f27  ___
-   f28  ___
-   f29  ___
    f30  MS_L
    f31  MS_D
    f32  MS_U
    f33  MS_R
-   f34  ___
-   e35  ___
 
-   e36  ___
-   f37  ___
    f38  C_X
    f39  C_C
    f40  C_V
-   f41  ___
-   EL   ___
-   ER   ___
-   f42  ___
-   f43  ___
-   f44  ___
-   f45  ___
-   f46  ___
-   e47  ___
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ACL0
-   t53  ACL2
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
+   f56  ACL0
+   k57  ACL2
 `,
 
     // Layer 8: TOGGLE - Layer toggle controls
@@ -616,16 +421,16 @@ const layers = {
    f46  XXX
    e47  XXX
 
-   t48  XXX
-   t49  XXX
-   t50  XXX
-   t51  XXX
-   t52  XXX
-   t53  XXX
-   t54  XXX
-   t55  XXX
-   t56  XXX
-   t57  XXX
+   s52  XXX
+   e53  XXX
+   e54  XXX
+   f55  XXX
+   f56  XXX
+   f59  XXX
+   f60  XXX
+   e61  XXX
+   e62  XXX
+   s63  XXX
 `,
 
     // Layer 9: L1_NAV - Navigation and symbols
@@ -684,16 +489,6 @@ const layers = {
    f46  ?
    e47  "
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `,
 
     // Layer 10: L2 - Function keys + numpad + unicode
@@ -752,16 +547,17 @@ const layers = {
    f46  P=
    e47  ___
 
-   t48  PENT
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  SMILE
-   t56  UPSIDE
-   t57  ___
+
+   s52  PENT
+   e53  ___
+   e54  ___
+   f55  ___
+   f56  ___
+   f59  ___
+   f60  ___
+   e61  SMILE
+   e62  UPSIDE
+   s63  ___
 `,
 
     // Layer 11: L3 - RGB and backlight controls
@@ -820,16 +616,16 @@ const layers = {
    f46  ___
    e47  RM_TOGG
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  DF(0)
-   t53  ___
-   t54  LGUI
-   t55  ___
-   t56  ___
-   t57  ___
+   s52  ___
+   e53  ___
+   e54  ___
+   f55  ___
+   f56  DF(0)
+   f59  ___
+   f60  LGUI
+   e61  ___
+   e62  ___
+   s63  ___
 `,
 
     // Layer 12: L4 - System and debug controls
@@ -888,16 +684,7 @@ const layers = {
    f46  ___
    e47  CK_LINT
 
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  DF(0)
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
+   f56  DF(0)
 `,
 
     // Layer 13: L5 - Full QWERTY (no mods)
@@ -955,32 +742,7 @@ const layers = {
    f45  .
    f46  /
    e47  RCTL
-
-   t48  ___
-   t49  ___
-   t50  ___
-   t51  ___
-   t52  ___
-   t53  ___
-   t54  ___
-   t55  ___
-   t56  ___
-   t57  ___
 `
-};
-
-// Combos definition
-const combos = {
-    QW_ESC: { keys: ['Q', 'W'], result: 'ESC' },
-    AS_TAB: { keys: ['A', 'S'], result: 'TAB' },
-    OP_BACKSPACE: { keys: ['O', 'P'], result: 'BSPC' },
-    IO_DEL: { keys: ['I', 'O'], result: 'DEL' },
-    LSEMI_ENTER: { keys: ['L', ';'], result: 'ENT' },
-    DOTSLASH_BACKSLASH: { keys: ['.', '/'], result: 'BSLS' },
-    ZERO_BACKSPACE: { keys: ['0', 'BSPC'], result: '+' },
-    CAPS_WORD: { keys: ['LSFT', 'BSPC'], result: 'CK_CAPS' },
-    MINUS: { keys: ['0', '9'], result: '-' },
-    TOGGLE_LAYER: { keys: ['L1_ENT', 'L4_SPC'], result: 'LT_TOGGLE' }
 };
 
 // Encoder mappings (same for all layers)
@@ -1000,12 +762,12 @@ const layerOrder = [
     'overlay_fn',      // 6: OVERLAY_FN
     'overlay_mouse',   // 7: OVERLAY_MOUSE
     'toggle',          // 8: TOGGLE
-    'l1_nav',          // 9: L1_NAV
+    'l1',              // 9: L1_NAV
     'l2',              // 10: L2
     'l3',              // 11: L3
     'l4',              // 12: L4
     'l5'               // 13: L5
 ];
 
-export { layers, combos, encoders, layerOrder };
+export { layers, encoders, layerOrder };
 export default layers;

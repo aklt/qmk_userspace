@@ -67,6 +67,18 @@ export const letterToKeycode = {
   RALT: 'KC_RIGHT_ALT',
   RGUI: 'KC_RIGHT_GUI',
   BSP: 'KC_BACKSPACE',
+  BSLS: 'KC_BACKSLASH',
+  GRV: 'KC_GRAVE',
+  MINS: 'KC_MINUS',
+  EQL: 'KC_EQUAL',
+  LBRC: 'KC_LEFT_BRACKET',
+  RBRC: 'KC_RIGHT_BRACKET',
+  SCLN: 'KC_SEMICOLON',
+  QUOT: 'KC_QUOTE',
+  COMM: 'KC_COMMA',
+  DOT: 'KC_DOT',
+  SLSH: 'KC_SLASH',
+  NUM: 'KC_NUM_LOCK',
 
   // Function keys
   F1: 'KC_F1',
@@ -264,6 +276,133 @@ export const letterToKeycode = {
   mute: 'KC_KB_MUTE',
   volup: 'KC_KB_VOLUME_UP',
   voldown: 'KC_KB_VOLUME_DOWN',
+
+  // Named key aliases (from keyToQmkCodeOrDefine)
+  PGDOWN: 'KC_PGDN',
+  SLCK: 'KC_SCRL',
+  EL: 'KC_MUTE',
+  ER: 'KC_TAB',
+  C_QUOT: 'KC_QUOT',
+  SENT: 'KC_ENT',
+  SPACE: 'KC_SPC',
+  ' ': 'KC_SPC',
+
+  // Layer taps
+  L1: 'D_L1',
+  L2: 'D_L2',
+  L3: 'D_L3',
+  L4: 'D_L4',
+  L5: 'D_L5',
+  GUI_DEL: 'GUI_DEL',
+  RCTL_QUOT: 'RCTL_T(KC_QUOT)',
+  SC_SENT: 'SC_SENT',
+
+  // Default layer switches
+  DF_QWER: 'DF_QWER',
+  DF_COLE: 'DF_COLE',
+  DF_GAME: 'DF_GAME',
+
+  // Toggle layers
+  TG_FN: 'CK_FKEY',
+  TG_NKEY: 'CK_NKEY',
+  TG_MOUS: 'CK_MOUS',
+
+  // Custom keycodes
+  CK_REST: 'CK_REST',
+  CK_COLO: 'CK_COLO',
+  CK_FLAS: 'CK_FLAS',
+  CK_CONS: 'CK_CONS',
+  CK_LINT: 'CK_LINT',
+  CK_CAPS: 'CK_CAPS',
+  SH_TOGG: 'SH_TOGG',
+
+  // Numpad operators
+  'P+': 'KC_PPLS',
+  'P-': 'KC_PMNS',
+  'P*': 'KC_PAST',
+  'P/': 'KC_PSLS',
+  'P.': 'KC_PDOT',
+  'P,': 'KC_PCMM',
+  'P=': 'KC_PEQL',
+  PENT: 'KC_PENT',
+
+  // Mouse keys
+  BTN1: 'MS_BTN1',
+  BTN2: 'MS_BTN2',
+  MS_L: 'MS_LEFT',
+  MS_R: 'MS_RGHT',
+  MS_U: 'MS_UP',
+  MS_D: 'MS_DOWN',
+  WHLU: 'MS_WHLU',
+  WHLD: 'MS_WHLD',
+  ACL0: 'MS_ACL0',
+  ACL2: 'MS_ACL2',
+
+  // Ctrl + key combinations
+  C_X: 'C(KC_X)',
+  C_C: 'C(KC_C)',
+  C_V: 'C(KC_V)',
+  C_Z: 'C(KC_Z)',
+  C_LEFT: 'C(KC_LEFT)',
+  C_RIGHT: 'C(KC_RIGHT)',
+
+  // RGB/Underglow controls
+  RM_TOGG: 'RM_TOGG',
+  RM_NEXT: 'RM_NEXT',
+  RM_PREV: 'RM_PREV',
+  RM_HUEU: 'RM_HUEU',
+  RM_HUED: 'RM_HUED',
+  RM_SATU: 'RM_SATU',
+  RM_SATD: 'RM_SATD',
+  RM_VALU: 'RM_VALU',
+  RM_VALD: 'RM_VALD',
+  UG_TOGG: 'UG_TOGG',
+  UG_NEXT: 'UG_NEXT',
+  UG_PREV: 'UG_PREV',
+  UG_HUEU: 'UG_HUEU',
+  UG_HUED: 'UG_HUED',
+
+  // Backlight controls
+  BL_TOGG: 'BL_TOGG',
+  BL_STEP: 'BL_STEP',
+  BL_UP: 'BL_UP',
+  BL_DOWN: 'BL_DOWN',
+  BL_BRTG: 'BL_BRTG',
+
+  // Unicode
+  AA: 'DA_AA',
+  AE: 'DA_AE',
+  OE: 'DA_OE',
+  CAT: 'UM(CAT)',
+  SMILE: 'UM(SMILE)',
+  UPSIDE: 'UM(UPSIDE)',
+  UC_PRV: 'UC_PREV',
+  UC_NXT: 'UC_NEXT',
+  UC_WIN: 'UC_WIN',
+
+  // System/Debug
+  DB_TOGG: 'DB_TOGG',
+  QK_BOOT: 'QK_BOOT',
+  EE_CLR: 'EE_CLR',
+
+  LEFT: "KC_LEFT",
+  RIGHT: "KC_RIGHT",
+  C_LEFT: "C(KC_LEFT)",
+  C_RIGHT: "C(KC_RIGHT)",
+
+  // Layer operations
+  'TG(0)': 'TG(0)',
+  'TG(1)': 'TG(1)',
+  'TG(2)': 'TG(2)',
+  'TG(3)': 'TG(3)',
+  'TG(4)': 'TG(4)',
+  'TG(5)': 'TG(5)',
+  'TO(0)': 'TO(0)',
+  'DF(0)': 'DF(0)',
+
+  // Kyria-specific placeholders
+  WIR: 'KC_TRNS',
+  OPR: 'KC_TRNS',
 };
 
 const keycodeToLetter = Object.fromEntries(
@@ -271,6 +410,13 @@ const keycodeToLetter = Object.fromEntries(
 );
 
 export function toKeycode(letter) {
+    // Handle transparent and blocked keys
+    if (letter === "___" || letter === "TRANS" || letter === "TRNS") {
+        return "_______";
+    }
+    if (letter === "XXX" || letter === "NO") {
+        return "XXXXXXX";
+    }
   const code = letterToKeycode[letter];
   if (!code) {
     throw new Error(`Unknown letter: ${letter}`);
