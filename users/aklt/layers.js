@@ -45,16 +45,16 @@ const layers = {
    e23  BSLS
 
    e24  LSFT
-   f25  a
-   f26  s
-   f27  d
-   f28  f
+   f25  HRM_A
+   f26  HRM_S
+   f27  HRM_D
+   f28  HRM_F
    f29  g
    f30  h
-   f31  j
-   f32  k
-   f33  l
-   f34  ;
+   f31  HRM_J
+   f32  HRM_K
+   f33  HRM_L
+   f34  HRM_SC
    e35  SC_SENT
 
    e36  LCTL

@@ -19,6 +19,18 @@ const uint32_t PROGMEM unicode_map[] = {
     [DK_AA_UPPER] = 0x00C5,  // Å
 };
 
+// HomeRow mods
+enum home_row_mods {
+    HRM_A = LSFT_T(KC_A),
+    HRM_S = LCTL_T(KC_S),
+    HRM_D = LALT_T(KC_D),
+    HRM_F = LGUI_T(KC_F),
+    HRM_J = RGUI_T(KC_J),
+    HRM_K = RALT_T(KC_K),
+    HRM_L = RCTL_T(KC_L),
+    HRM_SC = RSFT_T(KC_SCLN),
+}
+
 // {{{1 Globals
 static char         DetectedOsName[MAX_DETECTED_OS_LENGTH] = "Unknown";
 static os_variant_t DetectedOs                             = OS_UNSURE;

@@ -336,7 +336,7 @@ ${Object.entries(layerDefinitions)
 
 // Generate encoder map for all layers
 function formatEncoderMap() {
-    const layerNames = Object.keys(layerDefinitions).map(name => layerNameMap[name] || `LAYER_${name.toUpperCase()}`);
+    const layerNames = Object.keys(layerDefinitions).map(name => layerNameMap[name]);
     const encoderLines = layerNames.map(name =>
         `    [${name}] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)}`
     ).join(",\n");

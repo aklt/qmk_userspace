@@ -1,5 +1,5 @@
 // Generated keymap.c
-// Built: 2026-02-19T20:33:47.752Z
+// Built: 2026-02-19T22:59:30.772Z
 // Keyboard: sofle
 // Generator: define-keymap.js
 
@@ -11,13 +11,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE_SOFLE] = LAYOUT_MACRO(
     /* GRV      1        2        3        4        5                                            6        7        8        9        0        BSPC    
        TAB      q        w        e        r        t                                            y        u        i        o        p        BSLS    
-       LSFT     a        s        d        f        g                                            h        j        k        l        ;        SC_SENT 
+       LSFT     HRM_A    HRM_S    HRM_D    HRM_F    g                                            h        HRM_J    HRM_K    HRM_L    HRM_SC   SC_SENT 
        LCTL     z        x        c        v        b        MUTE                       TAB      n        m        ,        .        /        RCTL_QUOT
                          LGUI     L3       L2       LALT     L1                         L4       GUI_DEL  L5       APP      RGUI                    */
     
        KC_GRAVE, KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                                         KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BACKSPACE,
        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                                         KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BACKSLASH,
-       KC_LEFT_SHIFT, KC_A,     KC_S,     KC_D,     KC_F,     KC_G,                                         KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  SC_SENT,
+       KC_LEFT_SHIFT, HRM_A,    HRM_S,    HRM_D,    HRM_F,    KC_G,                                         KC_H,     HRM_J,    HRM_K,    HRM_L,    HRM_SC,   SC_SENT,
        KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_KB_MUTE,                   KC_TAB,   KC_N,     KC_M,     KC_COMMA, KC_DOT,   KC_SLASH, RCTL_T(KC_QUOT),
                          KC_LEFT_GUI, D_L3,     D_L2,     KC_LEFT_ALT, D_L1,                       D_L4,     GUI_DEL,  D_L5,     KC_APP,   KC_RIGHT_GUI
     ),

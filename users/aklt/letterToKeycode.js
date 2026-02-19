@@ -417,7 +417,7 @@ export function toKeycode(letter) {
     if (letter === "XXX" || letter === "NO") {
         return "XXXXXXX";
     }
-  const code = letterToKeycode[letter];
+  const code = letterToKeycode[letter] ||letter;
   if (!code) {
     throw new Error(`Unknown letter: ${letter}`);
   }

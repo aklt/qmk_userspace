@@ -49,3 +49,12 @@ bool process_detected_host_os_user(os_variant_t detected_os);
 #error "Unsupported keyboard"
 #endif
 
+
+// Homerow mods
+#define TAPPING_TERM 250
+#define PERMISSIVE_HOLD
+#define FLOW_TAP_TERM 150
+#define CHORDAL_HOLD
+#define SPECULATIVE_HOLD
+
+
