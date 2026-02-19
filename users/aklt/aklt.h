@@ -10,6 +10,8 @@
 
 #define AKLT_VERSION "0.0.1"
 
+
+#define OS_DETECTION_ENABLE 1
 // Constants
 #define MAX_DETECTED_OS_LENGTH 10
 #define MASTER_LED_COUNT 35

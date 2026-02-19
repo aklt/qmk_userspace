@@ -193,7 +193,7 @@ const layers = {
    s02  2
    s03  3
    s04  4
-   s05  E
+   s05  e
    s06  XXX
    s07  XXX
    s08  XXX
@@ -525,10 +525,10 @@ const layers = {
    f27  ___
    f28  ___
    f29  ___
-   f30  B
+   f30  b
    f31  ___
    f32  ___
-   f33  W
+   f33  w
    f34  OE
    e35  AE
 
@@ -679,41 +679,41 @@ const layers = {
    s11  BSPC
 
    e12  TAB
-   f13  Q
-   f14  W
-   f15  E
-   f16  R
-   f17  T
-   f18  Y
-   f19  U
-   f20  I
-   f21  O
-   f22  P
+   f13  q
+   f14  w
+   f15  e
+   f16  r
+   f17  t
+   f18  y
+   f19  u
+   f20  i
+   f21  o
+   f22  p
    e23  BSLS
 
    e24  LSFT
-   f25  A
-   f26  S
-   f27  D
-   f28  F
-   f29  G
-   f30  H
-   f31  J
-   f32  K
-   f33  L
+   f25  a
+   f26  s
+   f27  d
+   f28  f
+   f29  g
+   f30  h
+   f31  j
+   f32  k
+   f33  l
    f34  ;
    e35  SC_SENT
 
    e36  LCTL
-   f37  Z
-   f38  X
-   f39  C
-   f40  V
-   f41  B
+   f37  z
+   f38  x
+   f39  c
+   f40  v
+   f41  b
    e42  MUTE
    e45  XXX
-   f46  N
-   f47  M
+   f46  n
+   f47  m
    f48  ,
    f49  .
    f50  /

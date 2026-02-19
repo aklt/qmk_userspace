@@ -1,108 +1,211 @@
+// Generated keymap.c
+// Built: 2026-02-19T17:07:38.815Z
+// Keyboard: sofle
+// Generator: define-keymap.js
 
 #include "aklt.h"
 
-// {{{1 Mapping
+// {{{1 Keymap Layers
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE_SOFLE] = LAYOUT_MACRO(
-        KC_GRV,  ____QWERTY_NUM_LEFT________________________,                  ____QWERTY_NUM_RIGHT_______________________, KC_BSPC,
-        KC_TAB,  ____QWERTY_LEFT_1__________________________,                  ____QWERTY_RIGHT_1_________________________, KC_BSLS,
-        KC_LSFT, ____QWERTY_LEFT_2__________________________,                  ____QWERTY_RIGHT_2_________________________, SC_SENT,
-        KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_TAB, ____QWERTY_RIGHT_3_________________________, RCTL_T(KC_QUOT),
-                          KC_LGUI, D_L3,  D_L2,    KC_LALT, D_L1, D_L4,   GUI_DEL, L5_F,    KC_APP,  KC_RGUI
+    /* GRV      1        2        3        4        5                                            6        7        8        9        0        BSPC    
+       TAB      q        w        e        r        t                                            y        u        i        o        p        BSLS    
+       LSFT     a        s        d        f        g                                            h        j        k        l        ;        SC_SENT 
+       LCTL     z        x        c        v        b        MUTE                       TAB      n        m        ,        .        /        RCTL_QUOT
+                         LGUI     L3       L2       LALT     L1                         L4       GUI_DEL  L5       APP      RGUI                    */
+    
+       KC_GRAVE, KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                                         KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BACKSPACE,
+       KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                                         KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BACKSLASH,
+       KC_LEFT_SHIFT, KC_A,     KC_S,     KC_D,     KC_F,     KC_G,                                         KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  SC_SENT,
+       KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_KB_MUTE,                   KC_TAB,   KC_N,     KC_M,     KC_COMMA, KC_DOT,   KC_SLASH, RCTL_T(KC_QUOT),
+                         KC_LEFT_GUI, D_L3,     D_L2,     KC_LEFT_ALT, D_L1,                       D_L4,     GUI_DEL,  D_L5,     KC_APP,   KC_RIGHT_GUI
     ),
+
     [BASE_QWERTY] = LAYOUT_MACRO(
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        _______, ____QWERTY_LEFT_1__________________________,                   ____QWERTY_RIGHT_1_________________________, _______,
-        _______, ____QWERTY_LEFT_2__________________________,                   ____QWERTY_RIGHT_2_________________________, _______,
-        _______, ____QWERTY_LEFT_3__________________________, _______, _______, ____QWERTY_RIGHT_3_________________________, _______,
-                          ____TRANS_10____________________________________________________________________________
+    /* _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  _______ 
+       ___      q        w        e        r        t                                            y        u        i        o        p        ___     
+       ___      a        s        d        f        g                                            h        j        k        l        ;        ___     
+       ___      z        x        c        v        b        ___                        ___      n        m        ,        .        /        ___     
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                                         KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     _______,
+       _______,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,                                         KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  _______,
+       _______,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     _______,                    _______,  KC_N,     KC_M,     KC_COMMA, KC_DOT,   KC_SLASH, _______,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [BASE_COLEMAK_DH] = LAYOUT_MACRO(
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        _______, ____COLEMAK_LEFT_1_________________________,                   ____COLEMAK_RIGHT_1________________________, _______,
-        _______, ____COLEMAK_LEFT_2_________________________,                   ____COLEMAK_RIGHT_2________________________, _______,
-        _______, ____COLEMAK_LEFT_3_________________________, _______, _______, ____COLEMAK_RIGHT_3________________________, _______,
-                          ____TRANS_10____________________________________________________________________________
+    /* ___      ___      ___      ___      ___      ___                                          ___      ___      ___      ___      ___      ___     
+       ___      q        w        f        p        b                                            j        l        u        y        ;        ___     
+       ___      a        r        s        t        g                                            m        n        e        i        o        ___     
+       ___      z        x        c        d        v        ___                        ___      k        h        ,        .        /        ___     
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,                                         KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  _______,
+       _______,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,                                         KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     _______,
+       _______,  KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,     _______,                    _______,  KC_K,     KC_H,     KC_COMMA, KC_DOT,   KC_SLASH, _______,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [BASE_GAMING] = LAYOUT_MACRO(
-        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_E,                      ____XXXXX_6_________________________________________,
-        KC_TAB,  KC_Q,    KC_C,    KC_W,    KC_F,    KC_T,                      ____XXXXX_6_________________________________________,
-        KC_LSFT, KC_R,    KC_A,    KC_S,    KC_D,    KC_G,                      ____XXXXX_6_________________________________________,
-        KC_LCTL, KC_Y,    KC_Z,    KC_X,    KC_V,    KC_B,    _______, _______, ____XXXXX_6_________________________________________,
-                          _______, _______, _______, KC_TAB,  KC_SPC,  ____TRANS_5________________________________
+    /* ESC      1        2        3        4        e                                            XXX      XXX      XXX      XXX      XXX      XXX     
+       TAB      q        c        w        f        t                                            XXX      XXX      XXX      XXX      XXX      XXX     
+       LSFT     r        a        s        d        g                                            XXX      XXX      XXX      XXX      XXX      XXX     
+       LCTL     y        z        x        v        b        ___                        ___      XXX      XXX      XXX      XXX      XXX      XXX     
+                         _______  _______  _______  TAB      SPC                        _______  _______  _______  _______  _______                 */
+    
+       KC_ESCAPE, KC_1,     KC_2,     KC_3,     KC_4,     KC_E,                                         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+       KC_TAB,   KC_Q,     KC_C,     KC_W,     KC_F,     KC_T,                                         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+       KC_LEFT_SHIFT, KC_R,     KC_A,     KC_S,     KC_D,     KC_G,                                         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+       KC_LCTL,  KC_Y,     KC_Z,     KC_X,     KC_V,     KC_B,     _______,                    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                         _______,  _______,  _______,  KC_TAB,   KC_SPACE,                   _______,  _______,  _______,  _______,  _______
     ),
+
     [OVERLAY_NUMPAD] = LAYOUT_MACRO(
-        CK_COLO, ____TRANS_5________________________________,                   CK_COLO, KC_PEQL, KC_PSLS, KC_PAST, XXXXXXX, KC_BSPC,
-        ____TRANS_6_________________________________________,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   XXXXXXX, KC_PMNS,
-        ____TRANS_6_________________________________________,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PENT, KC_PPLS,
-        ____TRANS_6_________________________________________, _______, _______, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_PCMM,
-                          ____TRANS_6_________________________________________, XXXXXXX, KC_P0,   KC_PDOT, KC_PENT
+    /* CK_COLO  ___      ___      ___      ___      ___                                          CK_COLO  P=       P/       P*       XXX      BSPC    
+       ___      ___      ___      ___      ___      ___                                          XXX      P7       P8       P9       XXX      P-      
+       ___      ___      ___      ___      ___      ___                                          XXX      P4       P5       P6       PENT     P+      
+       ___      ___      ___      ___      ___      ___      ___                        ___      XXX      P1       P2       P3       PENT     P,      
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       CK_COLO,  _______,  _______,  _______,  _______,  _______,                                      CK_COLO,  KC_PEQL,  KC_PSLS,  KC_PAST,  XXXXXXX,  KC_BACKSPACE,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      XXXXXXX,  KC_KP_7,  KC_KP_8,  KC_KP_9,  XXXXXXX,  KC_PMNS,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      XXXXXXX,  KC_KP_4,  KC_KP_5,  KC_KP_6,  KC_PENT,  KC_PPLS,
+       _______,  _______,  _______,  _______,  _______,  _______,  _______,                    _______,  XXXXXXX,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_PENT,  KC_PCMM,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [OVERLAY_NUM] = LAYOUT_MACRO(
-        _______, ____QWERTY_NUM_LEFT________________________,                   ____QWERTY_NUM_RIGHT_______________________, _______,
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        ____TRANS_6_________________________________________, _______, _______, ____TRANS_6_________________________________________,
-                          ____TRANS_10____________________________________________________________________________
+    /* ___      1        2        3        4        5                                            6        7        8        9        0        ___     
+       _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  _______ 
+       _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  _______ 
+       _______  _______  _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______  _______  _______ 
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                                         KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______,  _______,  _______,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [OVERLAY_FN] = LAYOUT_MACRO(
-        _______, ____FUNC_LEFT_5____________________________,                   ____FUNC_RIGHT_5___________________________, _______,
-        _______, _______, _______, _______, _______, KC_F11,                    KC_F12,  _______, _______, _______, _______, _______,
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        ____TRANS_6_________________________________________, _______, _______, ____TRANS_6_________________________________________,
-                          ____TRANS_10____________________________________________________________________________
+    /* ___      F1       F2       F3       F4       F5                                           F6       F7       F8       F9       F10      ___     
+       _______  _______  _______  _______  _______  F11                                          F12      _______  _______  _______  _______  _______ 
+       _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  _______ 
+       _______  _______  _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______  _______  _______ 
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,                                        KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   _______,
+       _______,  _______,  _______,  _______,  _______,  KC_F11,                                       KC_F12,   _______,  _______,  _______,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______,  _______,  _______,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [OVERLAY_MOUSE] = LAYOUT_MACRO(
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        ____TRANS_6_________________________________________,                   MS_BTN1, MS_WHLD, MS_WHLU, MS_BTN2, _______, _______,
-        ____TRANS_6_________________________________________,                   MS_LEFT, MS_DOWN, MS_UP,   MS_RGHT, _______, _______,
-        _______, _______, C(KC_X), C(KC_C), C(KC_V), _______, _______, _______, ____TRANS_6_________________________________________,
-                          _______, _______, _______, _______, MS_ACL0, MS_ACL2, _______, _______, _______, _______
+    /* _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  _______ 
+       _______  _______  _______  _______  _______  _______                                      BTN1     WHLD     WHLU     BTN2     _______  _______ 
+       _______  _______  _______  _______  _______  _______                                      MS_L     MS_D     MS_U     MS_R     _______  _______ 
+       _______  _______  C_X      C_C      C_V      _______  _______                    _______  _______  _______  _______  _______  _______  _______ 
+                         _______  _______  _______  _______  ACL0                       _______  _______  _______  _______  _______                 */
+    
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      MS_BTN1,  MS_WHLD,  MS_WHLU,  MS_BTN2,  _______,  _______,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      MS_LEFT,  MS_DOWN,  MS_UP,    MS_RGHT,  _______,  _______,
+       _______,  _______,  C(KC_X),  C(KC_C),  C(KC_V),  _______,  _______,                    _______,  _______,  _______,  _______,  _______,  _______,  _______,
+                         _______,  _______,  _______,  _______,  MS_ACL0,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [TOGGLE] = LAYOUT_MACRO(
-        CK_REST, CK_FKEY, CK_NKEY, CK_MOUS, XXXXXXX, SH_TOGG,                   DF_COLE, DF_GAME, DF_QWER, XXXXXXX, XXXXXXX, CK_REST,
-        XXXXXXX, DF_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   ____XXXXX_6_________________________________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_FKEY, DF_GAME,                   ____XXXXX_6_________________________________________,
-        XXXXXXX, XXXXXXX, DF_COLE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CK_NKEY, CK_MOUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    /* CK_REST  TG_FN    TG_NKEY  TG_MOUS  XXX      SH_TOGG                                      DF_COLE  DF_GAME  DF_QWER  XXX      XXX      CK_REST 
+       XXX      DF_QWER  XXX      XXX      XXX      XXX                                          XXX      XXX      XXX      XXX      XXX      XXX     
+       XXX      XXX      XXX      XXX      TG_FN    DF_GAME                                      XXX      XXX      XXX      XXX      XXX      XXX     
+       XXX      XXX      DF_COLE  XXX      XXX      XXX      XXX                        XXX      TG_NKEY  TG_MOUS  XXX      XXX      XXX      XXX     
+                         XXX      XXX      XXX      XXX      XXX                        XXX      XXX      XXX      XXX      XXX                     */
+    
+       CK_REST,  CK_FKEY,  CK_NKEY,  CK_MOUS,  XXXXXXX,  SH_TOGG,                                      DF_COLE,  DF_GAME,  DF_QWER,  XXXXXXX,  XXXXXXX,  CK_REST,
+       XXXXXXX,  DF_QWER,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CK_FKEY,  DF_GAME,                                      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+       XXXXXXX,  XXXXXXX,  DF_COLE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                    XXXXXXX,  CK_NKEY,  CK_MOUS,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
     ),
+
     [L1_NAV] = LAYOUT_MACRO(
-        KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS, KC_MINS, KC_EQL,
-        KC_INS,  _______, _______, _______, _______, KC_CAPS,                   KC_HOME, KC_END,  S(KC_9), S(KC_0), KC_LBRC, KC_RBRC,
-        KC_DEL,  _______, _______, _______, _______, KC_NUM,                    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_LCBR, KC_RCBR,
-        ____TRANS_6_________________________________________, _______, _______, CC_LEFT, KC_PGDN, KC_PGUP, CC_RIGH, LSFT(KC_SLSH), LSFT(KC_QUOT),
-                          ____TRANS_10____________________________________________________________________________
+    /* ESC      !        @        #        $        %                                            ^        &        *        _        -        =       
+       INS      ___      ___      ___      ___      CAPS                                         HOME     END      (        )        [        ]       
+       DEL      ___      ___      ___      ___      NUM                                          LEFT     DOWN     UP       RIGHT    {        }       
+       ___      ___      ___      ___      ___      ___      ___                        ___      C_LEFT   PGDN     PGUP     C_RIGHT  ?        "       
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       KC_ESCAPE, KC_EXLM,  KC_AT,    KC_NONUS_HASH, KC_DLR,   KC_PERC,                                      KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_UNDS,  KC_MINUS, KC_EQUAL,
+       KC_INSERT, _______,  _______,  _______,  _______,  KC_CAPS_LOCK,                                     KC_HOME,  KC_END,   KC_LPRN,  KC_RPRN,  KC_LEFT_BRACKET, KC_RIGHT_BRACKET,
+       KC_DELETE, _______,  _______,  _______,  _______,  KC_NUM_LOCK,                                     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_LCBR,  KC_RCBR,
+       _______,  _______,  _______,  _______,  _______,  _______,  _______,                    _______,  C(KC_LEFT), KC_PAGE_DOWN, KC_PAGE_UP, C(KC_RIGHT), KC_QUES,  KC_DQUO,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     ),
+
     [L2] = LAYOUT_MACRO(
-        ____FUNC_LEFT_5____________________________, KC_F6,                     _______, KC_NUM,  KC_PAST, KC_LGUI, KC_UNDS, KC_PLUS,
-        KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_PGUP, KC_P7,   KC_P8,   KC_P9,   KC_LCTL, DA_AA,
-        ____TRANS_6_________________________________________,                   KC_B,    _______, _______, KC_W,    DA_OE,   DA_AE,
-        _______, LC_Z,    LC_X,    LC_C,    LC_V ,   _______, _______, _______, UM(CAT), KC_P1,   UC_PREV, UC_NEXT, KC_PEQL, _______,
-                          KC_PENT, _______, _______, _______, _______, _______, _______, UM(SMILE), UM(UPSIDE), _______
+    /* F1       F2       F3       F4       F5       F6                                           ___      NUM      P*       LGUI     _        +       
+       F7       F8       F9       F10      F11      F12                                          PGUP     P7       P8       P9       LCTL     AA      
+       ___      ___      ___      ___      ___      ___                                          b        ___      ___      w        OE       AE      
+       ___      C_Z      C_X      C_C      C_V      ___      ___                        ___      CAT      P1       UC_PRV   UC_NXT   P=       ___     
+                         PENT     ___      ___      ___      ___                        ___      ___      SMILE    UPSIDE   ___                     */
+    
+       KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,                                        _______,  KC_NUM_LOCK, KC_PAST,  KC_LEFT_GUI, KC_UNDS,  KC_PLUS,
+       KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,                                       KC_PAGE_UP, KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_LCTL,  DA_AA,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      KC_B,     _______,  _______,  KC_W,     DA_OE,    DA_AE,
+       _______,  C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),  _______,  _______,                    _______,  UM(CAT),  KC_KP_1,  UC_PREV,  UC_NEXT,  KC_PEQL,  _______,
+                         KC_PENT,  _______,  _______,  _______,  _______,                    _______,  _______,  UM(SMILE), UM(UPSIDE), _______
     ),
+
     [L3] = LAYOUT_MACRO(
-        TG(0),   ____TRANS_5________________________________,                   BL_STEP, BL_UP,   BL_DOWN, BL_BRTG, _______, BL_TOGG,
-        ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
-        _______, RM_TOGG, RM_HUEU, RM_SATU, RM_VALU, _______,                   UG_PREV, UG_HUEU, UG_HUED, UG_NEXT, _______, UG_TOGG,
-        _______, RM_NEXT, RM_HUED, RM_SATD, RM_VALD, _______, _______, KC_NO,   RM_PREV, RM_SATU, RM_SATD, RM_NEXT, _______, RM_TOGG,
-                          _______, _______, _______, _______, DF(0),   _______, KC_LGUI, _______, _______, _______
+    /* TG(0)    ___      ___      ___      ___      ___                                          BL_STEP  BL_UP    BL_DOWN  BL_BRTG  ___      BL_TOGG 
+       ___      ___      ___      ___      ___      ___                                          ___      ___      ___      ___      ___      ___     
+       ___      RM_TOGG  RM_HUEU  RM_SATU  RM_VALU  ___                                          UG_PREV  UG_HUEU  UG_HUED  UG_NEXT  ___      UG_TOGG 
+       ___      RM_NEXT  RM_HUED  RM_SATD  RM_VALD  ___      ___                        XXX      RM_PREV  RM_SATU  RM_SATD  RM_NEXT  ___      RM_TOGG 
+                         ___      ___      ___      ___      DF(0)                      ___      LGUI     ___      ___      ___                     */
+    
+       TG(0),    _______,  _______,  _______,  _______,  _______,                                      BL_STEP,  BL_UP,    BL_DOWN,  BL_BRTG,  _______,  BL_TOGG,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  _______,
+       _______,  RM_TOGG,  RM_HUEU,  RM_SATU,  RM_VALU,  _______,                                      UG_PREV,  UG_HUEU,  UG_HUED,  UG_NEXT,  _______,  UG_TOGG,
+       _______,  RM_NEXT,  RM_HUED,  RM_SATD,  RM_VALD,  _______,  _______,                    XXXXXXX,  RM_PREV,  RM_SATU,  RM_SATD,  RM_NEXT,  _______,  RM_TOGG,
+                         _______,  _______,  _______,  _______,  DF(0),                      _______,  KC_LEFT_GUI, _______,  _______,  _______
     ),
+
     [L4] = LAYOUT_MACRO(
-        TO(0),   TG(1),   TG(2),   TG(3),   TG(4),   TG(5),                     _______, _______, _______, _______, DB_TOGG, QK_BOOT,
-        _______, _______, UC_WIN,  _______, _______, _______,                   _______, _______, _______, _______, EE_CLR,  CK_FLAS,
-        ____TRANS_6_________________________________________,                   _______, _______, _______, _______, _______, CK_CONS,
-        ____TRANS_6_________________________________________, _______, _______, _______, _______, _______, _______, _______, CK_LINT,
-                          _______, _______, _______, _______, DF(0),   _______, _______, _______, _______, _______
+    /* TO(0)    TG(1)    TG(2)    TG(3)    TG(4)    TG(5)                                        ___      ___      ___      ___      DB_TOGG  QK_BOOT 
+       ___      ___      UC_WIN   ___      ___      ___                                          ___      ___      ___      ___      EE_CLR   CK_FLAS 
+       _______  _______  _______  _______  _______  _______                                      _______  _______  _______  _______  _______  CK_CONS 
+       _______  _______  _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______  _______  CK_LINT 
+                         _______  _______  _______  _______  DF(0)                      _______  _______  _______  _______  _______                 */
+    
+       TO(0),    TG(1),    TG(2),    TG(3),    TG(4),    TG(5),                                        _______,  _______,  _______,  _______,  DB_TOGG,  QK_BOOT,
+       _______,  _______,  UC_WIN,   _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  EE_CLR,   CK_FLAS,
+       _______,  _______,  _______,  _______,  _______,  _______,                                      _______,  _______,  _______,  _______,  _______,  CK_CONS,
+       _______,  _______,  _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______,  _______,  CK_LINT,
+                         _______,  _______,  _______,  _______,  DF(0),                      _______,  _______,  _______,  _______,  _______
     ),
+
     [L5] = LAYOUT_MACRO(
-        KC_ESC,  ____QWERTY_NUM_LEFT________________________,                   ____QWERTY_NUM_RIGHT_______________________, KC_BSPC,
-        KC_TAB,  ____QWERTY_LEFT_1__________________________,                   ____QWERTY_RIGHT_1_________________________, KC_BSLS,
-        KC_LSFT, ____QWERTY_LEFT_2__________________________,                   ____QWERTY_RIGHT_2_________________________, SC_SENT,
-        KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_NO,   ____QWERTY_RIGHT_3_________________________, KC_RCTL,
-                          ____TRANS_10____________________________________________________________________________
+    /* ESC      1        2        3        4        5                                            6        7        8        9        0        BSPC    
+       TAB      q        w        e        r        t                                            y        u        i        o        p        BSLS    
+       LSFT     a        s        d        f        g                                            h        j        k        l        ;        SC_SENT 
+       LCTL     z        x        c        v        b        MUTE                       XXX      n        m        ,        .        /        RCTL    
+                         _______  _______  _______  _______  _______                    _______  _______  _______  _______  _______                 */
+    
+       KC_ESCAPE, KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                                         KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BACKSPACE,
+       KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                                         KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BACKSLASH,
+       KC_LEFT_SHIFT, KC_A,     KC_S,     KC_D,     KC_F,     KC_G,                                         KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  SC_SENT,
+       KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_KB_MUTE,                   XXXXXXX,  KC_N,     KC_M,     KC_COMMA, KC_DOT,   KC_SLASH, KC_RCTL,
+                         _______,  _______,  _______,  _______,  _______,                    _______,  _______,  _______,  _______,  _______
     )
 };
+
+// {{{1 Encoder Map
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
@@ -124,46 +227,107 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
 // {{{1 Combos
-
 #ifdef COMBO_ENABLE
-
 enum combos {
-    QW_ESC,
-    AS_TAB,
-    OP_BACKSPACE,
-    IO_DEL,
-    LSEMI_ENTER,
-    DOTSLASH_BACKSLASH,
+    COMBO_0_QW,
+    COMBO_1_AS,
+    COMBO_2_ZX,
+    COMBO_3_WE,
+    COMBO_4_SD,
+    COMBO_5_XC,
+    COMBO_6_ER,
+    COMBO_7_RT,
+    COMBO_8_FG,
+    COMBO_9_VB,
+    COMBO_10_YU,
+    COMBO_11_HJ,
+    COMBO_12_NM,
+    COMBO_13_UI,
+    COMBO_14_JK,
+    COMBO_15_M_,
+    COMBO_16_IO,
+    COMBO_17_KL,
+    COMBO_18___,
+    COMBO_19_OP,
+    COMBO_20_L_,
+    COMBO_21___,
+    COMBO_22_IK,
+    COMBO_23_K_,
+    COMBO_24_JM,
+    COMBO_25_L_,
+    COMBO_26_UJ,
+    COMBO_27_OL,
     ZERO_BACKSPACE,
     CAPS_WORD,
     MINUS,
     TOGGLE_LAYER
 };
-
-const uint16_t PROGMEM qw_esc[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM as_tab[] = {KC_A, KC_S, COMBO_END};
-
-const uint16_t PROGMEM op_backspace[]       = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM io_del[]             = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM lsemi_enter[]        = {KC_L, KC_SCLN, COMBO_END};
-const uint16_t PROGMEM dotslash_backslash[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM zero_backspace[]     = {KC_0, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM caps_word[]          = {KC_LSFT, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM zero_nine[]          = {KC_0, KC_9, COMBO_END};
-
-const uint16_t PROGMEM toggle_layer[] = {D_L1, D_L4, COMBO_END};
-
+const uint16_t PROGMEM defCOMBO_0_QW[] = { KC_Q, KC_W, COMBO_END };
+const uint16_t PROGMEM defCOMBO_1_AS[] = { KC_A, KC_S, COMBO_END };
+const uint16_t PROGMEM defCOMBO_2_ZX[] = { KC_Z, KC_X, COMBO_END };
+const uint16_t PROGMEM defCOMBO_3_WE[] = { KC_W, KC_E, COMBO_END };
+const uint16_t PROGMEM defCOMBO_4_SD[] = { KC_S, KC_D, COMBO_END };
+const uint16_t PROGMEM defCOMBO_5_XC[] = { KC_X, KC_C, COMBO_END };
+const uint16_t PROGMEM defCOMBO_6_ER[] = { KC_E, KC_R, COMBO_END };
+const uint16_t PROGMEM defCOMBO_7_RT[] = { KC_R, KC_T, COMBO_END };
+const uint16_t PROGMEM defCOMBO_8_FG[] = { KC_F, KC_G, COMBO_END };
+const uint16_t PROGMEM defCOMBO_9_VB[] = { KC_V, KC_B, COMBO_END };
+const uint16_t PROGMEM defCOMBO_10_YU[] = { KC_Y, KC_U, COMBO_END };
+const uint16_t PROGMEM defCOMBO_11_HJ[] = { KC_H, KC_J, COMBO_END };
+const uint16_t PROGMEM defCOMBO_12_NM[] = { KC_N, KC_M, COMBO_END };
+const uint16_t PROGMEM defCOMBO_13_UI[] = { KC_U, KC_I, COMBO_END };
+const uint16_t PROGMEM defCOMBO_14_JK[] = { KC_J, KC_K, COMBO_END };
+const uint16_t PROGMEM defCOMBO_15_M_[] = { KC_M, KC_COMMA, COMBO_END };
+const uint16_t PROGMEM defCOMBO_16_IO[] = { KC_I, KC_O, COMBO_END };
+const uint16_t PROGMEM defCOMBO_17_KL[] = { KC_K, KC_L, COMBO_END };
+const uint16_t PROGMEM defCOMBO_18___[] = { KC_COMMA, KC_DOT, COMBO_END };
+const uint16_t PROGMEM defCOMBO_19_OP[] = { KC_O, KC_P, COMBO_END };
+const uint16_t PROGMEM defCOMBO_20_L_[] = { KC_L, KC_SCLN, COMBO_END };
+const uint16_t PROGMEM defCOMBO_21___[] = { KC_DOT, KC_SLASH, COMBO_END };
+const uint16_t PROGMEM defCOMBO_22_IK[] = { KC_I, KC_K, COMBO_END };
+const uint16_t PROGMEM defCOMBO_23_K_[] = { KC_K, KC_COMMA, COMBO_END };
+const uint16_t PROGMEM defCOMBO_24_JM[] = { KC_J, KC_M, COMBO_END };
+const uint16_t PROGMEM defCOMBO_25_L_[] = { KC_L, KC_DOT, COMBO_END };
+const uint16_t PROGMEM defCOMBO_26_UJ[] = { KC_U, KC_J, COMBO_END };
+const uint16_t PROGMEM defCOMBO_27_OL[] = { KC_O, KC_L, COMBO_END };
+const uint16_t PROGMEM defZERO_BACKSPACE[] = { KC_0, KC_BSPC, COMBO_END };
+const uint16_t PROGMEM defCAPS_WORD[] = { KC_LSFT, KC_BSPC, COMBO_END };
+const uint16_t PROGMEM defMINUS[] = { KC_0, KC_9, COMBO_END };
+const uint16_t PROGMEM defTOGGLE_LAYER[] = { D_L1, D_L4, COMBO_END };
 combo_t key_combos[] = {
-    [QW_ESC] = COMBO(qw_esc, KC_ESC),
-    [AS_TAB] = COMBO(as_tab, KC_TAB),
-    [OP_BACKSPACE] = COMBO(op_backspace, KC_BSPC),
-    [IO_DEL] = COMBO(io_del, KC_DEL),
-    [LSEMI_ENTER] = COMBO(lsemi_enter, KC_ENT),
-    [DOTSLASH_BACKSLASH] = COMBO(dotslash_backslash, KC_BSLS),
-    [ZERO_BACKSPACE] = COMBO(zero_backspace, KC_PLUS),
-    [CAPS_WORD] = COMBO(caps_word, CK_CAPS),
-    [MINUS] = COMBO(zero_nine, KC_MINUS),
-    [TOGGLE_LAYER] = COMBO(toggle_layer, LT(TOGGLE, KC_NO))
+      [COMBO_0_QW] = COMBO(defCOMBO_0_QW, KC_ESCAPE),
+      [COMBO_1_AS] = COMBO(defCOMBO_1_AS, KC_TAB),
+      [COMBO_2_ZX] = COMBO(defCOMBO_2_ZX, KC_DELETE),
+      [COMBO_3_WE] = COMBO(defCOMBO_3_WE, KC_TAB),
+      [COMBO_4_SD] = COMBO(defCOMBO_4_SD, KC_PIPE),
+      [COMBO_5_XC] = COMBO(defCOMBO_5_XC, KC_LCTL),
+      [COMBO_6_ER] = COMBO(defCOMBO_6_ER, KC_LEFT_ALT),
+      [COMBO_7_RT] = COMBO(defCOMBO_7_RT, KC_SPACE),
+      [COMBO_8_FG] = COMBO(defCOMBO_8_FG, KC_SPACE),
+      [COMBO_9_VB] = COMBO(defCOMBO_9_VB, KC_SPACE),
+      [COMBO_10_YU] = COMBO(defCOMBO_10_YU, KC_PLUS),
+      [COMBO_11_HJ] = COMBO(defCOMBO_11_HJ, KC_MINUS),
+      [COMBO_12_NM] = COMBO(defCOMBO_12_NM, KC_ASTR),
+      [COMBO_13_UI] = COMBO(defCOMBO_13_UI, KC_LEFT_BRACKET),
+      [COMBO_14_JK] = COMBO(defCOMBO_14_JK, KC_LPRN),
+      [COMBO_15_M_] = COMBO(defCOMBO_15_M_, KC_LCBR),
+      [COMBO_16_IO] = COMBO(defCOMBO_16_IO, KC_RIGHT_BRACKET),
+      [COMBO_17_KL] = COMBO(defCOMBO_17_KL, KC_RPRN),
+      [COMBO_18___] = COMBO(defCOMBO_18___, KC_RCBR),
+      [COMBO_19_OP] = COMBO(defCOMBO_19_OP, KC_BACKSPACE),
+      [COMBO_20_L_] = COMBO(defCOMBO_20_L_, KC_ENTER),
+      [COMBO_21___] = COMBO(defCOMBO_21___, KC_BACKSLASH),
+      [COMBO_22_IK] = COMBO(defCOMBO_22_IK, KC_PAGE_UP),
+      [COMBO_23_K_] = COMBO(defCOMBO_23_K_, KC_PAGE_DOWN),
+      [COMBO_24_JM] = COMBO(defCOMBO_24_JM, KC_HOME),
+      [COMBO_25_L_] = COMBO(defCOMBO_25_L_, KC_END),
+      [COMBO_26_UJ] = COMBO(defCOMBO_26_UJ, KC_INSERT),
+      [COMBO_27_OL] = COMBO(defCOMBO_27_OL, KC_DELETE),
+      [ZERO_BACKSPACE] = COMBO(defZERO_BACKSPACE, KC_PLUS),
+      [CAPS_WORD] = COMBO(defCAPS_WORD, CK_CAPS),
+      [MINUS] = COMBO(defMINUS, KC_MINUS),
+      [TOGGLE_LAYER] = COMBO(defTOGGLE_LAYER, LT(TOGGLE, KC_NO))
 };
 
 #endif // COMBO_ENABLE
+

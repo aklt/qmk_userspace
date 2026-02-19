@@ -278,7 +278,11 @@ function formatLayerDefinitionPretty(
         );
     });
     if (opt.code) {
-        template = template.replace(/\b /g, ",").replace(/\b$/gm, ",");
+        template = template.split('\n')
+            .filter(line => typeof line === 'string' && line.length > 0)
+            .map(line => line.replace(/(\S)(\s+)/g, (all, $1, $2) => `${$1},${$2 || ''}`))
+            .map(line => line.replace(/\s*,?\s+$/, '').replace(/$/, ","))
+            .join('\n').replace(/\s*,\s*$/, '');
     }
     return prefixWithString(template, "   ");
 }

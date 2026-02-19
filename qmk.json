@@ -1,4 +1,8 @@
 {
     "userspace_version": "1.0",
-    "build_targets": []
+    "build_targets": [
+        ["splitkb/aurora/sofle_v2/rev1", "aklt"],
+        ["splitkb/kyria/rev3", "aklt"],
+        ["ferris/sweep", "aklt"]
+    ]
 }
