@@ -119,14 +119,14 @@ const layers = {
    f39  c
    f40  v
    f41  b
-   EL   ___
-   ER   ___
-   f42  n
-   f43  m
-   f44  ,
-   f45  .
-   f46  /
-   e47  ___
+   e42  ___
+   e45  ___
+   f46  n
+   f47  m
+   f48  ,
+   f49  .
+   f50  /
+   e51  ___
 `,
 
     // Layer 2: BASE_COLEMAK_DH - Colemak-DH layout overlay
@@ -176,14 +176,14 @@ const layers = {
    f39  c
    f40  d
    f41  v
-   EL   ___
-   ER   ___
-   f42  k
-   f43  h
-   f44  ,
-   f45  .
-   f46  /
-   e47  ___
+   e42  ___
+   e45  ___
+   f46  k
+   f47  h
+   f48  ,
+   f49  .
+   f50  /
+   e51  ___
 `,
 
     // Layer 3: BASE_GAMING - Gaming layer (left hand optimized)
@@ -233,14 +233,14 @@ const layers = {
    f39  x
    f40  v
    f41  b
-   EL   ___
-   ER   ___
-   f42  XXX
-   f43  XXX
-   f44  XXX
-   f45  XXX
+   e42  ___
+   e45  ___
    f46  XXX
-   e47  XXX
+   f47  XXX
+   f48  XXX
+   f49  XXX
+   f50  XXX
+   e51  XXX
 
    f55  TAB
    f56  SPC
@@ -293,14 +293,14 @@ const layers = {
    f39  ___
    f40  ___
    f41  ___
-   EL   ___
-   ER   ___
-   f42  XXX
-   f43  P1
-   f44  P2
-   f45  P3
-   f46  PENT
-   e47  P,
+   e42  ___
+   e45  ___
+   f46  XXX
+   f47  P1
+   f48  P2
+   f49  P3
+   f50  PENT
+   e51  P,
 
    k57  XXX
    k58  P0
@@ -412,14 +412,14 @@ const layers = {
    f39  XXX
    f40  XXX
    f41  XXX
-   EL   XXX
-   ER   XXX
-   f42  TG_NKEY
-   f43  TG_MOUS
-   f44  XXX
-   f45  XXX
-   f46  XXX
-   e47  XXX
+   e42  XXX
+   e45  XXX
+   f46  TG_NKEY
+   f47  TG_MOUS
+   f48  XXX
+   f49  XXX
+   f50  XXX
+   e51  XXX
 
    s52  XXX
    e53  XXX
@@ -480,14 +480,14 @@ const layers = {
    f39  ___
    f40  ___
    f41  ___
-   EL   ___
-   ER   ___
-   f42  C_LEFT
-   f43  PGDN
-   f44  PGUP
-   f45  C_RIGHT
-   f46  ?
-   e47  "
+   e42  ___
+   e45  ___
+   f46  C_LEFT
+   f47  PGDN
+   f48  PGUP
+   f49  C_RIGHT
+   f50  ?
+   e51  "
 
 `,
 
@@ -538,14 +538,14 @@ const layers = {
    f39  C_C
    f40  C_V
    f41  ___
-   EL   ___
-   ER   ___
-   f42  CAT
-   f43  P1
-   f44  UC_PRV
-   f45  UC_NXT
-   f46  P=
-   e47  ___
+   e42  ___
+   e45  ___
+   f46  CAT
+   f47  P1
+   f48  UC_PRV
+   f49  UC_NXT
+   f50  P=
+   e51  ___
 
 
    s52  PENT
@@ -607,14 +607,14 @@ const layers = {
    f39  RM_SATD
    f40  RM_VALD
    f41  ___
-   EL   ___
-   ER   XXX
-   f42  RM_PREV
-   f43  RM_SATU
-   f44  RM_SATD
-   f45  RM_NEXT
-   f46  ___
-   e47  RM_TOGG
+   e42  ___
+   e45  XXX
+   f46  RM_PREV
+   f47  RM_SATU
+   f48  RM_SATD
+   f49  RM_NEXT
+   f50  ___
+   e51  RM_TOGG
 
    s52  ___
    e53  ___
@@ -656,33 +656,9 @@ const layers = {
    f22  EE_CLR
    e23  CK_FLAS
 
-   e24  ___
-   f25  ___
-   f26  ___
-   f27  ___
-   f28  ___
-   f29  ___
-   f30  ___
-   f31  ___
-   f32  ___
-   f33  ___
-   f34  ___
    e35  CK_CONS
 
-   e36  ___
-   f37  ___
-   f38  ___
-   f39  ___
-   f40  ___
-   f41  ___
-   EL   ___
-   ER   ___
-   f42  ___
-   f43  ___
-   f44  ___
-   f45  ___
-   f46  ___
-   e47  CK_LINT
+   e51  CK_LINT
 
    f56  DF(0)
 `,
@@ -734,14 +710,14 @@ const layers = {
    f39  C
    f40  V
    f41  B
-   EL   MUTE
-   ER   XXX
-   f42  N
-   f43  M
-   f44  ,
-   f45  .
-   f46  /
-   e47  RCTL
+   e42  MUTE
+   e45  XXX
+   f46  N
+   f47  M
+   f48  ,
+   f49  .
+   f50  /
+   e51  RCTL
 `
 };
 
