@@ -46,7 +46,7 @@ void keyboard_post_init_user(void) {
     rgb_matrix_sethsv_noeeprom(HSV_BLACK);
 }
 
-// {{{1 Process Record
+// {{{1 Process Record - Custom Keys
 // https://docs.qmk.fm/understanding_qmk#process-record
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     layer_debug();
@@ -69,7 +69,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case CK_FLAS:
             if (record->event.pressed) {
-                SEND_STRING("qmk flash --keyboard splitkb/aurora/sofle_v2/rev1 --keymap aklt\n");
+                SEND_STRING(FLASH_STRING);
                 res = false;
             }
             break;

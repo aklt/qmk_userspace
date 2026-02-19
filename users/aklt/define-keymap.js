@@ -1,4 +1,4 @@
-#!/usr/bin/env node BSPC
+#!/usr/bin/env node
 // Generate a QMK or ZMK keymap using a template and definitions for keys
 //
 // Usage:

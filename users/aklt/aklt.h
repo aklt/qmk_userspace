@@ -40,3 +40,12 @@ bool encoder_update_user(uint8_t index, bool clockwise);
 #ifdef OS_DETECTION_ENABLE
 bool process_detected_host_os_user(os_variant_t detected_os);
 #endif
+
+#ifdef KEYBOARD_splitkb_aurora_sofle_v2
+#define FLASH_STRING "qmk flash --keyboard splitkb/aurora/sofle_v2/rev1 --keymap aklt\n"
+#elif defined(KEYBOARD_splitkb_kyria_rev3)
+#define FLASH_STRING "qmk flash --keyboard splitkb/kyria/rev3 --keymap aklt\n"
+#else
+#error "Unsupported keyboard"
+#endif
+
