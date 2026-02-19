@@ -1,5 +1,5 @@
 // Generated keymap.c
-// Built: 2026-02-19T19:25:22.553Z
+// Built: 2026-02-19T20:33:47.752Z
 // Keyboard: sofle
 // Generator: define-keymap.js
 
@@ -134,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
     ),
 
-    [L1_NAV] = LAYOUT_MACRO(
+    [L1] = LAYOUT_MACRO(
     /* ESC      !        @        #        $        %                                            ^        &        *        _        -        =       
        INS      ___      ___      ___      ___      CAPS                                         HOME     END      (        )        {        }       
        DEL      ___      ___      ___      ___      NUM                                          LEFT     DOWN     UP       RIGHT    [        ]       
@@ -218,7 +218,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [OVERLAY_FN] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
     [OVERLAY_MOUSE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
     [TOGGLE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
-    [L1_NAV] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
+    [L1] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
     [L2] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
     [L3] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
     [L4] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},

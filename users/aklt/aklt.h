@@ -8,7 +8,7 @@
 
 #include "macros.h"
 
-#define AKLT_VERSION "0.0.1"
+#define AKLT_VERSION "0.0.1"  /home/aklt/src/keyb/qmk_userspace/users/aklt/aklt.c:209:36:
 
 #define OS_DETECTION_ENABLE 1
 // Constants

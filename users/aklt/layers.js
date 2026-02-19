@@ -434,7 +434,7 @@ const layers = {
 `,
 
     // Layer 9: L1_NAV - Navigation and symbols
-    l1_nav: `
+    l1: `
    s00  ESC
    s01  !
    s02  @

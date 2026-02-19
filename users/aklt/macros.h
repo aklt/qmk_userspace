@@ -26,8 +26,8 @@
 #define CK_NKEY TG(OVERLAY_NUMPAD)
 #define CK_FKEY TG(OVERLAY_FN)
 
-#define D_L1 LT(L1_NAV, KC_ENT)
-#define D_L2  LT(L2, KC_ESC)
+#define D_L1    LT(L1, KC_ENT)
+#define D_L2    LT(L2, KC_ESC)
 #define D_L3    LT(L3, KC_DEL)
 #define D_L4    LT(L4, KC_SPC)
 #define D_L5    LT(L5, KC_TAB)
@@ -102,7 +102,7 @@ enum layers {
     OVERLAY_FN,
     OVERLAY_MOUSE,
     TOGGLE,
-    L1_NAV,
+    L1,
     L2,
     L3,
     L4,

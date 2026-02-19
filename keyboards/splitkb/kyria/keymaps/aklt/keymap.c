@@ -1,5 +1,5 @@
 // Generated keymap.c
-// Built: 2026-02-19T18:40:58.605Z
+// Built: 2026-02-19T19:46:06.698Z
 // Keyboard: kyria
 // Generator: define-keymap.js
 
@@ -117,13 +117,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [L1_NAV] = LAYOUT_MACRO(
-    /* INS      ___      ___      ___      ___      CAPS                                         HOME     END      (        )        [        ]       
-       DEL      ___      ___      ___      ___      NUM                                          LEFT     DOWN     UP       RIGHT    {        }       
+    /* INS      ___      ___      ___      ___      CAPS                                         HOME     END      (        )        {        }       
+       DEL      ___      ___      ___      ___      NUM                                          LEFT     DOWN     UP       RIGHT    [        ]       
        ___      ___      ___      ___      ___      ___      ___      _______  _______  ___      C_LEFT   PGDN     PGUP     C_RIGHT  ?        "       
                                   _______  _______  _______  _______  _______  _______  _______  _______  _______  _______                          */
     
-       KC_INSERT, _______,  _______,  _______,  _______,  KC_CAPS_LOCK,                                     KC_HOME,  KC_END,   KC_LPRN,  KC_RPRN,  KC_LEFT_BRACKET, KC_RIGHT_BRACKET,
-       KC_DELETE, _______,  _______,  _______,  _______,  KC_NUM_LOCK,                                     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_LCBR,  KC_RCBR,
+       KC_INSERT, _______,  _______,  _______,  _______,  KC_CAPS_LOCK,                                     KC_HOME,  KC_END,   KC_LPRN,  KC_RPRN,  KC_LCBR,  KC_RCBR,
+       KC_DELETE, _______,  _______,  _______,  _______,  KC_NUM_LOCK,                                     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_LEFT_BRACKET, KC_RIGHT_BRACKET,
        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  C(KC_LEFT), KC_PAGE_DOWN, KC_PAGE_UP, C(KC_RIGHT), KC_QUES,  KC_DQUO,
                                   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
     ),
@@ -223,12 +223,13 @@ enum combos {
     COMBO_19_OP,
     COMBO_20_L_,
     COMBO_21___,
-    COMBO_22_IK,
-    COMBO_23_K_,
-    COMBO_24_JM,
-    COMBO_25_L_,
-    COMBO_26_UJ,
-    COMBO_27_OL,
+    COMBO_22_P_,
+    COMBO_23_IK,
+    COMBO_24_K_,
+    COMBO_25_JM,
+    COMBO_26_L_,
+    COMBO_27_UJ,
+    COMBO_28_OL,
     ZERO_BACKSPACE,
     CAPS_WORD,
     MINUS,
@@ -256,12 +257,13 @@ const uint16_t PROGMEM defCOMBO_18___[] = { KC_COMMA, KC_DOT, COMBO_END };
 const uint16_t PROGMEM defCOMBO_19_OP[] = { KC_O, KC_P, COMBO_END };
 const uint16_t PROGMEM defCOMBO_20_L_[] = { KC_L, KC_SCLN, COMBO_END };
 const uint16_t PROGMEM defCOMBO_21___[] = { KC_DOT, KC_SLASH, COMBO_END };
-const uint16_t PROGMEM defCOMBO_22_IK[] = { KC_I, KC_K, COMBO_END };
-const uint16_t PROGMEM defCOMBO_23_K_[] = { KC_K, KC_COMMA, COMBO_END };
-const uint16_t PROGMEM defCOMBO_24_JM[] = { KC_J, KC_M, COMBO_END };
-const uint16_t PROGMEM defCOMBO_25_L_[] = { KC_L, KC_DOT, COMBO_END };
-const uint16_t PROGMEM defCOMBO_26_UJ[] = { KC_U, KC_J, COMBO_END };
-const uint16_t PROGMEM defCOMBO_27_OL[] = { KC_O, KC_L, COMBO_END };
+const uint16_t PROGMEM defCOMBO_22_P_[] = { KC_P, KC_BACKSLASH, COMBO_END };
+const uint16_t PROGMEM defCOMBO_23_IK[] = { KC_I, KC_K, COMBO_END };
+const uint16_t PROGMEM defCOMBO_24_K_[] = { KC_K, KC_COMMA, COMBO_END };
+const uint16_t PROGMEM defCOMBO_25_JM[] = { KC_J, KC_M, COMBO_END };
+const uint16_t PROGMEM defCOMBO_26_L_[] = { KC_L, KC_DOT, COMBO_END };
+const uint16_t PROGMEM defCOMBO_27_UJ[] = { KC_U, KC_J, COMBO_END };
+const uint16_t PROGMEM defCOMBO_28_OL[] = { KC_O, KC_L, COMBO_END };
 const uint16_t PROGMEM defZERO_BACKSPACE[] = { KC_0, KC_BSPC, COMBO_END };
 const uint16_t PROGMEM defCAPS_WORD[] = { KC_LSFT, KC_BSPC, COMBO_END };
 const uint16_t PROGMEM defMINUS[] = { KC_0, KC_9, COMBO_END };
@@ -289,12 +291,13 @@ combo_t key_combos[] = {
       [COMBO_19_OP] = COMBO(defCOMBO_19_OP, KC_BACKSPACE),
       [COMBO_20_L_] = COMBO(defCOMBO_20_L_, KC_ENTER),
       [COMBO_21___] = COMBO(defCOMBO_21___, KC_BACKSLASH),
-      [COMBO_22_IK] = COMBO(defCOMBO_22_IK, KC_PAGE_UP),
-      [COMBO_23_K_] = COMBO(defCOMBO_23_K_, KC_PAGE_DOWN),
-      [COMBO_24_JM] = COMBO(defCOMBO_24_JM, KC_HOME),
-      [COMBO_25_L_] = COMBO(defCOMBO_25_L_, KC_END),
-      [COMBO_26_UJ] = COMBO(defCOMBO_26_UJ, KC_INSERT),
-      [COMBO_27_OL] = COMBO(defCOMBO_27_OL, KC_DELETE),
+      [COMBO_22_P_] = COMBO(defCOMBO_22_P_, KC_BACKSPACE),
+      [COMBO_23_IK] = COMBO(defCOMBO_23_IK, KC_PAGE_UP),
+      [COMBO_24_K_] = COMBO(defCOMBO_24_K_, KC_PAGE_DOWN),
+      [COMBO_25_JM] = COMBO(defCOMBO_25_JM, KC_HOME),
+      [COMBO_26_L_] = COMBO(defCOMBO_26_L_, KC_END),
+      [COMBO_27_UJ] = COMBO(defCOMBO_27_UJ, KC_INSERT),
+      [COMBO_28_OL] = COMBO(defCOMBO_28_OL, KC_DELETE),
       [ZERO_BACKSPACE] = COMBO(defZERO_BACKSPACE, KC_PLUS),
       [CAPS_WORD] = COMBO(defCAPS_WORD, CK_CAPS),
       [MINUS] = COMBO(defMINUS, KC_MINUS),

@@ -310,7 +310,7 @@ const layerNameMap = {
     overlay_fn: "OVERLAY_FN",
     overlay_mouse: "OVERLAY_MOUSE",
     toggle: "TOGGLE",
-    l1_nav: "L1_NAV",
+    l1: "L1",
     l2: "L2",
     l3: "L3",
     l4: "L4",
@@ -322,7 +322,12 @@ function formatDefinitionCodeForLayers(forKb = "sofle") {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ${Object.entries(layerDefinitions)
         .map(([name, layerDef]) => {
-            const qmkLayerName = layerNameMap[name] || `LAYER_${name.toUpperCase()}`;
+            const qmkLayerName = layerNameMap[name];
+            if (!qmkLayerName) {
+                throw new Error(
+                    `Layer name '${name}' does not have a corresponding macro in macros.h, please add it to the layerNameMap`,
+                );
+            }
             return prefixWithString(formatLayerDefinitionCode(qmkLayerName, layerDef, forKb), "    ");
         })
         .join(",\n\n")}
