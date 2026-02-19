@@ -9,7 +9,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  ____QWERTY_LEFT_1__________________________,                  ____QWERTY_RIGHT_1_________________________, KC_BSLS,
         KC_LSFT, ____QWERTY_LEFT_2__________________________,                  ____QWERTY_RIGHT_2_________________________, SC_SENT,
         KC_LCTL, ____QWERTY_LEFT_3__________________________, KC_MUTE, KC_TAB, ____QWERTY_RIGHT_3_________________________, RCTL_T(KC_QUOT),
-                          KC_LGUI, L3_D,  L2_ESC,    KC_LALT, L1_LEAD, L4_S,   GUI_DEL, L5_F,    KC_APP,  KC_RGUI
+                          KC_LGUI, D_L3,  D_L2,    KC_LALT, D_L1, D_L4,   GUI_DEL, L5_F,    KC_APP,  KC_RGUI
     ),
     [BASE_QWERTY] = LAYOUT_MACRO(
         ____TRANS_6_________________________________________,                   ____TRANS_6_________________________________________,
@@ -151,7 +151,7 @@ const uint16_t PROGMEM zero_backspace[]     = {KC_0, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM caps_word[]          = {KC_LSFT, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM zero_nine[]          = {KC_0, KC_9, COMBO_END};
 
-const uint16_t PROGMEM toggle_layer[] = {L1_LEAD, L4_S, COMBO_END};
+const uint16_t PROGMEM toggle_layer[] = {D_L1, D_L4, COMBO_END};
 
 combo_t key_combos[] = {
     [QW_ESC] = COMBO(qw_esc, KC_ESC),
