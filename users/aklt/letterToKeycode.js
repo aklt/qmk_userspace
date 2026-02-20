@@ -390,6 +390,8 @@ export const letterToKeycode = {
   C_LEFT: "C(KC_LEFT)",
   C_RIGHT: "C(KC_RIGHT)",
 
+  HRM_A: 'LSFT_T(KC_A)',
+
   // Layer operations
   'TG(0)': 'TG(0)',
   'TG(1)': 'TG(1)',

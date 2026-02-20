@@ -59,7 +59,6 @@
 #define TRI_LAYER_ADJUST_LAYER  6
 
 // Tap Dance
-#define TAPPING_TERM 175
 #define TAPPING_TERM_PER_KEY
 
 // Leader key - https://docs.qmk.fm/features/leader_key
@@ -73,9 +72,9 @@
 #define MK_C_OFFSET_UNMOD 2
 
 // Caps Word - https://docs.qmk.fm/features/caps_word
-#define CAPS_WORD_IDLE_TIMEOUT 2000
-#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
-#define CAPS_WORD_INVERT_ON_SHIFT
+// #define CAPS_WORD_IDLE_TIMEOUT 2000
+// #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+// #define CAPS_WORD_INVERT_ON_SHIFT
 
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
 // #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE_MULTICROSS

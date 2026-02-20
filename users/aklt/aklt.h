@@ -49,12 +49,23 @@ bool process_detected_host_os_user(os_variant_t detected_os);
 #error "Unsupported keyboard"
 #endif
 
-
 // Homerow mods
+#undef TAPPING_TERM
 #define TAPPING_TERM 250
 #define PERMISSIVE_HOLD
 #define FLOW_TAP_TERM 150
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD
 
+// HomeRow mods
+enum home_row_mods {
+    HRM_A = LSFT_T(KC_A),
+    HRM_S = LCTL_T(KC_S),
+    HRM_D = LALT_T(KC_D),
+    HRM_F = LGUI_T(KC_F),
+    HRM_J = RGUI_T(KC_J),
+    HRM_K = RALT_T(KC_K),
+    HRM_L = RCTL_T(KC_L),
+    HRM_SC = RSFT_T(KC_SCLN)
+};
 

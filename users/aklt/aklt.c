@@ -19,16 +19,14 @@ const uint32_t PROGMEM unicode_map[] = {
     [DK_AA_UPPER] = 0x00C5,  // Å
 };
 
-// HomeRow mods
-enum home_row_mods {
-    HRM_A = LSFT_T(KC_A),
-    HRM_S = LCTL_T(KC_S),
-    HRM_D = LALT_T(KC_D),
-    HRM_F = LGUI_T(KC_F),
-    HRM_J = RGUI_T(KC_J),
-    HRM_K = RALT_T(KC_K),
-    HRM_L = RCTL_T(KC_L),
-    HRM_SC = RSFT_T(KC_SCLN),
+// {{{1 Homerow Modifiers
+char chordal_hold_handedness(keypos_t key) {
+    if (key.col == 0 || key.col == MATRIX_COLS - 1) {
+        return '*';  // Exempt the outer columns.
+    }
+    // On split keyboards, typically, the first half of the rows are on the
+    // left, and the other half are on the right.
+    return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
 
 // {{{1 Globals
@@ -91,12 +89,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 res = false;
             }
             break;
+#ifdef CAPS_WORD_ENABLE
         case CK_CAPS:
             if (record->event.pressed) {
                 caps_word_toggle();
                 res = false;
             }
             break;
+#endif // CAPS_WORD_ENABLE
         case CK_CONS:
             if (record->event.pressed) {
                 SEND_STRING("qmk console");
